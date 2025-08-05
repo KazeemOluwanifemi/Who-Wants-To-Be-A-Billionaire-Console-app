@@ -20,6 +20,7 @@ public class Main {
 //            Start or end the game
             if (reader.hasNextInt()) {
                 playOrExitGame = reader.nextInt();
+                reader.nextLine();
 //                return a method's functionality based on user's input
                 if (playOrExitGame == 1) {
                     System.out.println("Alright then, let's play!");
@@ -32,28 +33,32 @@ public class Main {
             } else {
                 System.out.println("Invalid input, try again!");
             }
-            reader.close();
 
-//            load game questions; counter counts the number of questions displayed
-            int counter = 0;
-
+//            load game questions;
+//            counter counts the number of questions displayed
+            int questionCounter = 0;
             while(true){
                 System.out.println("Are you ready?[Yes/No]");
 //            Accept user input, validate it and call displayQuestion method based on the user's input
-                String userPlay = reader.nextLine().trim();
+                String userPlay = reader.nextLine();
+//                reader.nextLine();
                 if (userPlay.isEmpty()) {
                     System.out.println("Input cannot be empty.");
                 } else if (userPlay.equalsIgnoreCase("Yes")) {
-                    displayQuestions(counter);
+                    displayQuestions(questionCounter);
+                    break;
+                } else if (userPlay.equalsIgnoreCase("No")){
+                    System.out.println("Okay, bye!");
                     break;
                 }
             }
+            reader.close();
         }
     }
 
 //    Handles starting the game screen
     public static void startGame(String userName) {
-        Scanner reader = new Scanner(System.in);
+//        Scanner reader = new Scanner(System.in);
         if (userName.isEmpty()) {
             System.out.println("An error occurred while accepting your name, please try again");
         } else {
@@ -78,24 +83,41 @@ public class Main {
 
 //    Handles question display
     public static void displayQuestions(int counter){
+        Scanner reader = new Scanner(System.in);
 //        access the userStats details
-
-//        initialize number of questions counter
-
+        UserStats.User user = new UserStats.User();
+//        initialize number of questions counter and user answer variable
+        int counterCorrect = user.crtAnswers;
+        int counterWrong = user.wrongAnswers;
+        String userAnswer = "";
 
 //        access the method in the questionHandling class
         QuestionsHandling theQuestion = new QuestionsHandling();
         ArrayList<QuestionsHandling.Question> questionList = theQuestion.getQuestionDet("trivia_quiz.csv");
 
-        for (QuestionsHandling.Question question : questionList) {
-            System.out.println(question.question);
-            System.out.println("A. " + question.optionA);
-            System.out.println("B. " + question.optionB);
-            System.out.println("C. " + question.optionC);
-            System.out.println("D. " + question.optionD);
-//            System.out.println(questionList.get(i).correctOption);
-        }
+        while(counter <= 0){
+            for (QuestionsHandling.Question question : questionList) {
+                System.out.println(question.question);
+                System.out.println("A. " + question.optionA);
+                System.out.println("B. " + question.optionB);
+                System.out.println("C. " + question.optionC);
+                System.out.println("D. " + question.optionD);
 
-//        questionList = theQuestion.getQuestionDet("trivia_quiz.csv");
+                System.out.print("Enter your final answer[this answer cannot be changed]: ");
+                userAnswer = reader.nextLine().toUpperCase();
+//                process and validate the input using a function
+                counter++;
+
+                if(userAnswer.equalsIgnoreCase(question.correctOption)){
+                    System.out.println("Correct, you have earned $1,000!");
+                    counterCorrect++;
+                } else{
+                    System.out.println("You entered the wrong answer");
+//                    call swap question option or safety net option based on counter value
+                }
+//            System.out.println();
+            }
+
+        }
     }
 }
