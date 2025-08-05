@@ -5,7 +5,7 @@ import java.io.*;
 public class QuestionsHandling {
     Scanner reader = new Scanner(System.in);
 //    one question class serving as a template for each object question
-    class Question{
+static class Question{
         String question;
         String optionA;
         String optionB;

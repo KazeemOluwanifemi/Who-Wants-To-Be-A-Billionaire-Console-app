@@ -15,9 +15,9 @@ public class Main {
             System.out.println("1. Play the game");
             System.out.println("2. Exit the game");
 
-//            Validate user's input
+//            Validate user's input and start game
             int playOrExitGame = 0;
-
+//            Start or end the game
             if (reader.hasNextInt()) {
                 playOrExitGame = reader.nextInt();
 //                return a method's functionality based on user's input
@@ -32,10 +32,28 @@ public class Main {
             } else {
                 System.out.println("Invalid input, try again!");
             }
+            reader.close();
+
+//            load game questions; counter counts the number of questions displayed
+            int counter = 0;
+
+            while(true){
+                System.out.println("Are you ready?[Yes/No]");
+//            Accept user input, validate it and call displayQuestion method based on the user's input
+                String userPlay = reader.nextLine().trim();
+                if (userPlay.isEmpty()) {
+                    System.out.println("Input cannot be empty.");
+                } else if (userPlay.equalsIgnoreCase("Yes")) {
+                    displayQuestions(counter);
+                    break;
+                }
+            }
         }
     }
 
+//    Handles starting the game screen
     public static void startGame(String userName) {
+        Scanner reader = new Scanner(System.in);
         if (userName.isEmpty()) {
             System.out.println("An error occurred while accepting your name, please try again");
         } else {
@@ -53,7 +71,31 @@ public class Main {
                     "if you miss the next set of questions but answer that question correctly");
             System.out.println("6. There is a designated safety net for every 5 questions answered correctly");
             System.out.println("============================================================================");
-            System.out.println("Alright, that's it! Its time to earn cash " + userName + ", are you ready?");
+            System.out.println();
+            System.out.println("Alright, that's it! Its time to earn cash");
         }
+    }
+
+//    Handles question display
+    public static void displayQuestions(int counter){
+//        access the userStats details
+
+//        initialize number of questions counter
+
+
+//        access the method in the questionHandling class
+        QuestionsHandling theQuestion = new QuestionsHandling();
+        ArrayList<QuestionsHandling.Question> questionList = theQuestion.getQuestionDet("trivia_quiz.csv");
+
+        for (QuestionsHandling.Question question : questionList) {
+            System.out.println(question.question);
+            System.out.println("A. " + question.optionA);
+            System.out.println("B. " + question.optionB);
+            System.out.println("C. " + question.optionC);
+            System.out.println("D. " + question.optionD);
+//            System.out.println(questionList.get(i).correctOption);
+        }
+
+//        questionList = theQuestion.getQuestionDet("trivia_quiz.csv");
     }
 }

@@ -11,7 +11,7 @@ public class UserStats {
         String getName(){
             if(name == null || name.isEmpty()){
                 System.out.println("What is your name: ");
-                name = reader.nextLine();
+                name = reader.nextLine().trim();
             }
             return name;
         }
