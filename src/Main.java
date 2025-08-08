@@ -108,14 +108,17 @@ public class Main {
         String userAnswer = "";
         String userSwap = "";
         String finalAnswer = "";
-        boolean running = true;
+        boolean exitAll = true;
         double amtEarned = user.getAmtEarned();
 
 //        access the method in the questionHandling class
         Question theQuestion = new Question();
         List<Question> questionList = theQuestion.getQuestionDet("trivia_quiz.csv");
 
-        while(counter <= 0 && running){
+//        System.out.println("CHECK: counter=" + counter + ", exitAll=" + exitAll);
+        outerLoop:
+        while(exitAll){
+//            System.out.println("CHECK: counter=" + counter + ", exitAll=" + exitAll);
             for(int i = 0; i < questionList.size(); i++){
                 currentQuestion(questionList, i);
                 System.out.print("Enter your final answer[this answer cannot be changed]: ");
@@ -141,8 +144,7 @@ public class Main {
                                 System.out.println("Total amount earned by " + userName + " is #" + amtEarned);
                                 System.out.println("Returning to main menu...");
                                 counterWrong++;
-//                                running2 = false;
-                                running = false;
+                                break outerLoop;
                             }
                             case "N", "NO" -> {
                                 currentQuestion(questionList, i);
@@ -163,6 +165,7 @@ public class Main {
                                             counterCorrectSwapped = swapQuestion(reader, questionList, i, counterCorrect);
                                             if (counterCorrectSwapped > counterCorrect){
                                                 System.out.println("Yay, you got the answer!");
+                                                System.out.println("You have earned #" + questionList.get(i + 2).getCashPrize());
                                                 amtEarned += questionList.get(i + 2).getCashPrize();
                                                 counterCorrect++;
                                                 running2 = false;
@@ -172,18 +175,16 @@ public class Main {
                                             System.out.println("Alright, thanks for playing!");
                                             System.out.println("Total amount earned by " + user.getName() + " is #" + amtEarned);
                                             System.out.println("Returning to main menu...");
-                                            running = false;
                                             counterWrong++;
-//                            break;
+                                            break outerLoop;
                                         }
                                     }
                                     else {
                                         System.out.println("You are not eligible for the swap lifeline.");
                                         System.out.println("Total Amount Earned: #" + amtEarned);
-                                        System.out.println("Exiting game now");
-                                        running = false;
+                                        System.out.println("Returning to main menu...");
+                                        break outerLoop;
                                     }
-//                                    running2 = false;
                                 }
                             }
                         }
@@ -194,7 +195,7 @@ public class Main {
                 if(counter == 15 || counterCorrect == 15){
                     System.out.println("You have reached the end of the game, congratulations!");
                     System.out.println("Total amount earned by " + user.getName() + " is #" + amtEarned);
-                    running = false;
+                    exitAll = false;
                 }
             }
         }
@@ -217,18 +218,16 @@ public class Main {
                 System.out.println("D. " + questionList.get(i + 2).getOptionD());
 
                 System.out.println("Enter your final answer[this answer cannot be changed]: ");
-                System.out.print("->");
+                System.out.print("-> ");
                 userAnswer = reader.nextLine();
                 if(userAnswer.equalsIgnoreCase(questionList.get(i + 2).getCorrectOption())){
-                    System.out.println("Correct, you have earned $1000!");
                     counterCorrect++;
                     running3 = false;
                 } else{
                     System.out.println("You entered the wrong answer, exiting game now");
                     running3 = false;
-//                                    displayMainMenu();
                 }
-//                                This is the only time the loop needs another iteration
+//                This is the only time the loop needs another iteration
             } else if(userSwap.isEmpty()){
                 System.out.println("Input cannot be empty, try again.");
             } else if(userSwap.equals("N")){
