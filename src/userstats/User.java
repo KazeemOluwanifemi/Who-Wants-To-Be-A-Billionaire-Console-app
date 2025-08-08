@@ -12,7 +12,7 @@ public class User{
         Scanner reader = new Scanner(System.in);
         if (this.name == null || this.name.isEmpty()) {
             System.out.println("What is your name: ");
-            System.out.print("->");
+            System.out.print("-> ");
             this.name = reader.nextLine().trim();
         }
         return this.name;

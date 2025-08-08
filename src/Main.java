@@ -44,7 +44,7 @@ public class Main {
         System.out.println("Pick an option");
         System.out.println("1. Play the game");
         System.out.println("2. Exit the game");
-        System.out.print("->");
+        System.out.print("-> ");
     }
 
     //    Handles starting the game screen
@@ -59,14 +59,14 @@ public class Main {
             int questionCounter = 0;
             while(true){
                 System.out.println("Are you ready?[Yes/No]");
-                System.out.print("->");
+                System.out.print("-> ");
 //            Accept user input, validate it and call displayQuestion method based on the user's input
                 String userPlay = reader.nextLine();
 //                reader.nextLine();
                 if (userPlay.isEmpty()) {
                     System.out.println("Input cannot be empty.");
                 } else if (userPlay.equalsIgnoreCase("Yes")) {
-                    displayQuestions(questionCounter);
+                    displayQuestions(questionCounter, userName);
                     break;
                 } else if (userPlay.equalsIgnoreCase("No")){
                     System.out.println("Okay, bye!");
@@ -97,7 +97,7 @@ public class Main {
     }
 
     //    Handles question display
-    public static void displayQuestions(int counter){
+    public static void displayQuestions(int counter, String userName){
         Scanner reader = new Scanner(System.in);
 //        access the userStats details
         User user = new User();
@@ -115,7 +115,7 @@ public class Main {
         Question theQuestion = new Question();
         List<Question> questionList = theQuestion.getQuestionDet("trivia_quiz.csv");
 
-        while(counter <= 0 || running){
+        while(counter <= 0 && running){
             for(int i = 0; i < questionList.size(); i++){
                 currentQuestion(questionList, i);
                 System.out.print("Enter your final answer[this answer cannot be changed]: ");
@@ -132,61 +132,68 @@ public class Main {
                     String confirmAnswer = " ";
                     boolean running2 = true;
                     while(running2){
-                        System.out.print("->");
+                        System.out.print("-> ");
                         confirmAnswer = reader.nextLine().toUpperCase().trim();
-                        if(confirmAnswer.isEmpty()){
-                            System.out.println("Input cannot be empty.");
-                        } else if(confirmAnswer.equals("Y") || confirmAnswer.equals("YES")){
-                            System.out.println("You entered the wrong answer");
-                            counterWrong++;
-                            running2 = false;
-                        } else if(confirmAnswer.equals("N") || confirmAnswer.equals("NO")){
-                            currentQuestion(questionList, i);
-                            System.out.println("Enter your final answer[last time]: ");
-                            finalAnswer = reader.nextLine();
+                        switch (confirmAnswer) {
+                            case "" -> System.out.println("Input cannot be empty.");
+                            case "Y", "YES" -> {
+                                System.out.println("You entered the wrong answer");
+                                System.out.println("Total amount earned by " + userName + " is #" + amtEarned);
+                                System.out.println("Returning to main menu...");
+                                counterWrong++;
+//                                running2 = false;
+                                running = false;
+                            }
+                            case "N", "NO" -> {
+                                currentQuestion(questionList, i);
+                                System.out.println("Enter your final answer[last time]: ");
+                                finalAnswer = reader.nextLine();
 
-                            if(finalAnswer.equalsIgnoreCase(questionList.get(i).getCorrectOption())){
-                                System.out.println("Correct, you have earned #" + questionList.get(i).getCashPrize());
-                                amtEarned += questionList.get(i).getCashPrize();
-                                counterCorrect++;
-                                running2 = false;
-                            } else{
-                                System.out.println("Wrong answer, again.");
-                                running2 = false;
+                                if (finalAnswer.equalsIgnoreCase(questionList.get(i).getCorrectOption())) {
+                                    System.out.println("Correct, you have earned #" + questionList.get(i).getCashPrize());
+                                    amtEarned += questionList.get(i).getCashPrize();
+                                    counterCorrect++;
+                                    running2 = false;
+                                } else {
+//                                     this is supposed to notify a user's validity status for the swap question functionality
+                                    System.out.println("Wrong answer, again.");
+                                    if(counter >= 3 && !finalAnswer.equalsIgnoreCase(questionList.get(i).getCorrectOption())){
+                                        int swap = displaySwapMenu();
+                                        if(swap == 1){
+                                            counterCorrectSwapped = swapQuestion(reader, questionList, i, counterCorrect);
+                                            if (counterCorrectSwapped > counterCorrect){
+                                                System.out.println("Yay, you got the answer!");
+                                                amtEarned += questionList.get(i + 2).getCashPrize();
+                                                counterCorrect++;
+                                                running2 = false;
+                                                break;
+                                            }
+                                        } else if(swap == 0){
+                                            System.out.println("Alright, thanks for playing!");
+                                            System.out.println("Total amount earned by " + user.getName() + " is #" + amtEarned);
+                                            System.out.println("Returning to main menu...");
+                                            running = false;
+                                            counterWrong++;
+//                            break;
+                                        }
+                                    }
+                                    else {
+                                        System.out.println("You are not eligible for the swap lifeline.");
+                                        System.out.println("Total Amount Earned: #" + amtEarned);
+                                        System.out.println("Exiting game now");
+                                        running = false;
+                                    }
+//                                    running2 = false;
+                                }
                             }
                         }
                     }
 
-                    if(counter >= 3 && !finalAnswer.equalsIgnoreCase(questionList.get(i).getCorrectOption())){
-                        int swap = displaySwapMenu();
-                        if(swap == 1){
-                            counterCorrectSwapped = swapQuestion(reader, questionList, i, counterCorrect);
-                            if(counterCorrectSwapped > counterCorrect){
-                                System.out.println("Yay, you got the answer!");
-                                amtEarned += questionList.get(i+2).getCashPrize();
-                                counterCorrect++;
-                            }
-                        } else if(swap == 0){
-                            System.out.println("Alright, thanks for playing!");
-                            System.out.println("Total Amount Earned: " + amtEarned);
-                            running = false;
-                            counterWrong++;
-                        }
-                    }
-
-                    if(counter >= 3 && !finalAnswer.equalsIgnoreCase(questionList.get(i).getCorrectOption())){
-                        System.out.println("You are not eligible for the swap lifeline.");
-                        System.out.println("Total Amount Earned: " + amtEarned);
-                        System.out.println("Exiting game now");
-                        running = false;
-//                        displayMainMenu();
-//                        System.exit(0);
-                    }
-//                  call swap question option or safety net option based on counter value
                 }
 
                 if(counter == 15 || counterCorrect == 15){
                     System.out.println("You have reached the end of the game, congratulations!");
+                    System.out.println("Total amount earned by " + user.getName() + " is #" + amtEarned);
                     running = false;
                 }
             }
@@ -203,16 +210,16 @@ public class Main {
             userSwap = reader.nextLine().toUpperCase();
             if (userSwap.equals("S")){
 //                                swap the question
-                System.out.println(questionList.get(i +2).getQuestion());
-                System.out.println("A. " + questionList.get(i +2).getOptionA());
-                System.out.println("B. " + questionList.get(i +2).getOptionB());
-                System.out.println("C. " + questionList.get(i +2).getOptionC());
-                System.out.println("D. " + questionList.get(i +2).getOptionD());
+                System.out.println(questionList.get(i + 2).getQuestion());
+                System.out.println("A. " + questionList.get(i + 2).getOptionA());
+                System.out.println("B. " + questionList.get(i + 2).getOptionB());
+                System.out.println("C. " + questionList.get(i + 2).getOptionC());
+                System.out.println("D. " + questionList.get(i + 2).getOptionD());
 
                 System.out.println("Enter your final answer[this answer cannot be changed]: ");
                 System.out.print("->");
                 userAnswer = reader.nextLine();
-                if(userAnswer.equalsIgnoreCase(questionList.get(i +2).getCorrectOption())){
+                if(userAnswer.equalsIgnoreCase(questionList.get(i + 2).getCorrectOption())){
                     System.out.println("Correct, you have earned $1000!");
                     counterCorrect++;
                     running3 = false;
