@@ -134,7 +134,7 @@ public class Main {
                     System.out.println("Correct, you have earned #" + questionList.get(i).getCashPrize());
                     amtEarned += questionList.get(i).getCashPrize();
                     counterCorrect++;
-                } else{
+                } else {
 //                    ask user to validate wrong answer
                     System.out.println("Are you sure of this answer?[Y/N]");
                     String confirmAnswer = " ";
@@ -179,7 +179,8 @@ public class Main {
                                                 running2 = false;
                                                 break;
                                             } else{
-                                                running2 = false;
+//                                                get back to the main menu
+                                                break outerLoop;
                                             }
                                         } else if(swap == 0){
                                             System.out.println("Alright, thanks for playing!");
@@ -237,13 +238,13 @@ public class Main {
                     if (userAnswerCheck.equalsIgnoreCase(questionList.get(i + 2).getCorrectOption())) {
                         counterCorrect++;
                         running3 = false;
-                    } else {
-                        System.out.println("You entered the wrong answer, exiting game now");
+                    } else{
+                        System.out.println("You entered the wrong answer");
+                        System.out.println("Returning to main menu...");
                         running3 = false;
                     }
 //                This is the only time the loop needs another iteration
                 }
-                case "" -> System.out.println("Input cannot be empty, try again.");
                 case "N" -> {
                     System.out.println("Thanks for playing, bye!");
                     running3 = false;
