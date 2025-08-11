@@ -44,6 +44,8 @@ public class Question {
         return questions;
     }
 
+
+//    getters and setters
     public String getQuestion() {
         return question;
     }
