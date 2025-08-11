@@ -106,7 +106,7 @@ public class Main {
         int counterWrong = user.getWrongAnswers();
         int counterCorrectSwapped;
         String userAnswer = "";
-        String userSwap = "";
+//        String userSwap = "";
         String finalAnswer = "";
         String finalAnswerCheck = "";
         String userAnswerCheck = "";
@@ -123,6 +123,7 @@ public class Main {
         while(exitAll){
 //            System.out.println("CHECK: counter=" + counter + ", exitAll=" + exitAll);
             for(int i = 0; i < questionList.size(); i++){
+                running2 = true;
                 currentQuestion(questionList, i);
                 System.out.print("Enter your final answer[this answer cannot be changed]: ");
                 userAnswer = reader.nextLine().toUpperCase();
@@ -138,8 +139,7 @@ public class Main {
                     System.out.println("Are you sure of this answer?[Y/N]");
                     String confirmAnswer = " ";
                     System.out.println(running2);
-//                    running2 = true;
-                    while(running2 || !userAnswerCheck.equalsIgnoreCase(questionList.get(i).getCorrectOption())){
+                    while(running2){
                         System.out.println(running2);
                         System.out.print("-> ");
                         confirmAnswer = reader.nextLine().toUpperCase().trim();
