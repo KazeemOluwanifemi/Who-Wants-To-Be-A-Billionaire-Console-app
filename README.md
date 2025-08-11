@@ -21,7 +21,3 @@ This project is currently under active development. Features may be incomplete o
 ## Contributing
 
 Contributions are welcome! Please open issues or submit pull requests to help improve the project.
-
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
