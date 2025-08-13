@@ -11,12 +11,14 @@ This project is currently under active development. Features may be incomplete o
 
 - Interactive question and answer gameplay
 - Score tracking
+- Withdraw Earnings
 - Lifelines (coming soon)
 
 ## Roadmap
 
 - [x] **Swap Question Functionality:** Players can swap out a question they find difficult for a new one.
 - [ ] **Safety Net Functionality:** Implementation is in progress. Players will soon be able to secure a minimum guaranteed prize at certain milestones.
+- [ ] **Withdraw Earnings:** Players can withdraw their earned cash prize through a random generated code
 
 ## Contributing
 
