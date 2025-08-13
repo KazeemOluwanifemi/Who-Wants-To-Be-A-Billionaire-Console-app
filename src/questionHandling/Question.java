@@ -24,7 +24,7 @@ public class Question {
 
                 String[] pieces = line.split(",");
 
-                if (pieces.length < 7) {
+                if (pieces.length < 6) {
                     System.out.println("There is a faulty line in the question file");
                 } else {
                     Question theQuestion = new Question();
@@ -34,7 +34,6 @@ public class Question {
                     theQuestion.setOptionC(pieces[3].trim());
                     theQuestion.setOptionD(pieces[4].trim());
                     theQuestion.setCorrectOption(pieces[5].trim());
-                    theQuestion.setCashPrize(Integer.valueOf(pieces[6].trim()));
                     questions.add(theQuestion);
                 }
             }
@@ -42,6 +41,32 @@ public class Question {
             System.out.println("Error while handling file: " + e);
         }
         return questions;
+    }
+
+
+    public int cashPrize(int i){
+        List<String> cashPrizes = new ArrayList<> ();
+
+        cashPrizes.add("5000");
+        cashPrizes.add("10000");
+        cashPrizes.add("15000");
+        cashPrizes.add("20000");
+        cashPrizes.add("30000");
+        cashPrizes.add("50000");
+        cashPrizes.add("100000");
+        cashPrizes.add("150000");
+        cashPrizes.add("250000");
+        cashPrizes.add("500000");
+        cashPrizes.add("1000000");
+        cashPrizes.add("2000000");
+        cashPrizes.add("5000000");
+        cashPrizes.add("10000000");
+        cashPrizes.add("20000000");
+
+        setCashPrize(Integer.parseInt(cashPrizes.get(i)));
+        cashPrize = getCashPrize();
+
+        return cashPrize;
     }
 
 

@@ -3,7 +3,6 @@ import userstats.User;
 
 
 import java.util.*;
-//package userstats.UserStats;
 
 public class Main {
     public static void main(String[] args) {
@@ -98,6 +97,7 @@ public class Main {
 
     //    Handles question display
     public static void displayQuestions(int counter, String userName){
+        Random random = new Random();
         Scanner reader = new Scanner(System.in);
 //        access the userStats details
         User user = new User();
@@ -118,11 +118,14 @@ public class Main {
         Question theQuestion = new Question();
         List<Question> questionList = theQuestion.getQuestionDet("trivia_quiz.csv");
 
+
 //        System.out.println("CHECK: counter=" + counter + ", exitAll=" + exitAll);
         outerLoop:
         while(exitAll){
 //            System.out.println("CHECK: counter=" + counter + ", exitAll=" + exitAll);
+            Collections.shuffle(questionList);
             for(int i = 0; i < questionList.size(); i++){
+                int cashPrize = theQuestion.cashPrize(i);
                 running2 = true;
                 currentQuestion(questionList, i);
                 System.out.print("Enter your final answer[this answer cannot be changed]: ");
@@ -131,16 +134,14 @@ public class Main {
                 counter++;
 //                process and validate the input using a function
                 if(userAnswerCheck.equalsIgnoreCase(questionList.get(i).getCorrectOption())){
-                    System.out.println("Correct, you have earned #" + questionList.get(i).getCashPrize());
-                    amtEarned += questionList.get(i).getCashPrize();
+                    System.out.println("Correct, you have earned #" + String.valueOf(cashPrize));
+                    amtEarned += cashPrize;
                     counterCorrect++;
                 } else {
 //                    ask user to validate wrong answer
                     System.out.println("Are you sure of this answer?[Y/N]");
                     String confirmAnswer = " ";
-                    System.out.println(running2);
                     while(running2){
-                        System.out.println(running2);
                         System.out.print("-> ");
                         confirmAnswer = reader.nextLine().toUpperCase().trim();
                         switch (confirmAnswer) {
@@ -160,21 +161,22 @@ public class Main {
 
 
                                 if (finalAnswerCheck.equalsIgnoreCase(questionList.get(i).getCorrectOption())) {
-                                    System.out.println("Correct, you have earned #" + questionList.get(i).getCashPrize());
-                                    amtEarned += questionList.get(i).getCashPrize();
+                                    System.out.println("Correct, you have earned #" + String.valueOf(cashPrize));
+                                    amtEarned += cashPrize;
                                     counterCorrect++;
                                     running2 = false;
                                 } else {
 //                                     this is supposed to notify a user's validity status for the swap question functionality
                                     System.out.println("Wrong answer, again.");
                                     if(counter >= 3 && !finalAnswerCheck.equalsIgnoreCase(questionList.get(i).getCorrectOption())){
+                                        cashPrize = theQuestion.cashPrize(i+2);
                                         int swap = displaySwapMenu();
                                         if(swap == 1){
                                             counterCorrectSwapped = swapQuestion(reader, questionList, i, counterCorrect);
                                             if (counterCorrectSwapped > counterCorrect){
                                                 System.out.println("Yay, you got the answer!");
-                                                System.out.println("You have earned #" + questionList.get(i + 2).getCashPrize());
-                                                amtEarned += questionList.get(i + 2).getCashPrize();
+                                                System.out.println("You have earned #" + String.valueOf(cashPrize));
+                                                amtEarned += cashPrize;
                                                 counterCorrect++;
                                                 running2 = false;
                                                 break;
