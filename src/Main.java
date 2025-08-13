@@ -196,8 +196,8 @@ public class Main {
                                         System.out.println("You are not eligible for the swap lifeline.");
                                         System.out.println("Total Amount Earned: #" + amtEarned);
                                         System.out.println("Returning to main menu...");
-                                        running2 = false;
-//                                        break outerLoop;
+//                                        running2 = false;
+                                        break outerLoop;
                                     }
                                 }
                             }
