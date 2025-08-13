@@ -1,5 +1,7 @@
 import questionHandling.Question;
 import userstats.User;
+import userstats.UserFile;
+//import
 
 
 import java.util.*;
@@ -114,6 +116,9 @@ public class Main {
         boolean running2 = true;
         double amtEarned = user.getAmtEarned();
 
+//        handle file per user
+        UserFile userFile = new UserFile();
+
 //        access the method in the questionHandling class
         Question theQuestion = new Question();
         List<Question> questionList = theQuestion.getQuestionDet("trivia_quiz.csv");
@@ -213,6 +218,7 @@ public class Main {
                 }
             }
         }
+        userFile.createUserFile(userName, counterCorrect, counterWrong, amtEarned);
     }
 
     private static int swapQuestion(Scanner reader, List<Question> questionList, int i, int counterCorrect) {

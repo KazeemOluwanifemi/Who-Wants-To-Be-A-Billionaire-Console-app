@@ -1,0 +1,4 @@
+User Name: Nifs
+Number of correctly answered questions: 7
+Number of wrongly answered questions: 1
+Amount Earned by Nifs is: 230000.0
