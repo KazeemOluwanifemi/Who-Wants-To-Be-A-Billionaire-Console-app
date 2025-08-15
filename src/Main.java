@@ -85,13 +85,14 @@ public class Main {
         System.out.println("          RULES OF THE GAME           ");
         System.out.println("======================================");
         System.out.println("1. An answer confirmed as your final answer cannot be changed");
-        System.out.println("2. You are required to correctly answer 15 questions in a row to win the 1 million Naira prize");
+        System.out.println("2. You are required to correctly answer 15 questions in a row to win the 20 million Naira prize");
         System.out.println("3. Walk Away: If you are unsure about a question, you can choose to forfeit that question" +
                 "and walk away with your previously earned amount ");
         System.out.println("4. Three correctly answered questions are required to activate 'Walk Away'");
         System.out.println("5. Safety Net: The amount attached to a 'safety net' question is guaranteed for you even you " +
                 "if you miss the next set of questions but answer that question correctly");
         System.out.println("6. There is a designated safety net for every 5 questions answered correctly");
+        System.out.println("7. Use the checkout token provided after each game round to withdraw your earnings for respective rounds");
         System.out.println("============================================================================");
         System.out.println();
         System.out.println("Alright, that's it! Its time to earn cash");
@@ -218,7 +219,7 @@ public class Main {
                 }
             }
         }
-        userFile.createUserFile(userName, counterCorrect, counterWrong, amtEarned);
+        userFile.createUserFile(userName, counterCorrect, amtEarned);
     }
 
     private static int swapQuestion(Scanner reader, List<Question> questionList, int i, int counterCorrect) {
