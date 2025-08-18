@@ -45,7 +45,8 @@ public class UserFile {
                 bufferedFileWriter.write("Date and time of playing: " + formattedDateTime + "\n");
                 bufferedFileWriter.write("Username: " + userName + "\n");
                 bufferedFileWriter.write("Number of correctly answered questions: " + crtAnswers + "\n");
-                bufferedFileWriter.write("Amount earned by " + userName + " is: " + amtEarned + "\n");
+                bufferedFileWriter.write("Amount earned by " + userName + " is: #" + amtEarned + "\n");
+                bufferedFileWriter.write("--------------------------------------------------------------");
                 bufferedFileWriter.write("Checkout token for this game session is: " + token + "\n");
 
                 bufferedFileWriter.close();
@@ -61,7 +62,7 @@ public class UserFile {
                 bufferedFileWriter.write("Date and time of playing: " + formattedDateTime + "\n");
                 bufferedFileWriter.append("Username: ").append(userName).append("\n");
                 bufferedFileWriter.append("Number of correctly answered questions: ").append(String.valueOf(crtAnswers)).append("\n");
-                bufferedFileWriter.append("Amount earned by ").append(userName).append(" is: ").append(String.valueOf(amtEarned)).append("\n");
+                bufferedFileWriter.append("Amount earned by ").append(userName).append(" is: #").append(String.valueOf(amtEarned)).append("\n");
                 bufferedFileWriter.write("Checkout token for this game session is: " + token + "\n");
 
                 bufferedFileWriter.close();
