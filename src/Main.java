@@ -109,10 +109,11 @@ public class Main {
         int counterWrong = user.getWrongAnswers();
         int counterCorrectSwapped;
         String userAnswer = "";
-//        String userSwap = "";
         String finalAnswer = "";
         String finalAnswerCheck = "";
         String userAnswerCheck = "";
+        boolean safetyNet = false;
+        int safetyNetAmt = 0;
         boolean exitAll = true;
         boolean running2 = true;
         double amtEarned = user.getAmtEarned();
@@ -132,6 +133,15 @@ public class Main {
             Collections.shuffle(questionList);
             for(int i = 0; i < questionList.size(); i++){
                 int cashPrize = theQuestion.cashPrize(i);
+
+//                conditional calling of safety new function that returns the cash prize based on the safety net
+//                re-assign cashPrize variable to the result of that method in an if statement
+                if(i == 5 || i == 10){
+                    cashPrize = setSafetyNet(i);
+                    safetyNet = true;
+                    safetyNetAmt = cashPrize;
+                }
+                
                 running2 = true;
                 currentQuestion(questionList, i);
                 System.out.print("Enter your final answer[this answer cannot be changed]: ");
@@ -141,7 +151,7 @@ public class Main {
 //                process and validate the input using a function
                 if(userAnswerCheck.equalsIgnoreCase(questionList.get(i).getCorrectOption())){
                     System.out.println("Correct, you have earned #" + String.valueOf(cashPrize));
-                    amtEarned += cashPrize;
+                    amtEarned = cashPrize;
                     counterCorrect++;
                 } else {
 //                    ask user to validate wrong answer
@@ -154,6 +164,11 @@ public class Main {
                             case "" -> System.out.println("Input cannot be empty.");
                             case "Y", "YES" -> {
                                 System.out.println("You entered the wrong answer");
+                                if(safetyNet){
+                                    amtEarned = safetyNetAmt;
+                                } else {
+                                    amtEarned = 0;
+                                }
                                 System.out.println("Total amount earned by " + userName + " is #" + amtEarned);
                                 System.out.println("Returning to main menu...");
                                 counterWrong++;
@@ -168,7 +183,7 @@ public class Main {
 
                                 if (finalAnswerCheck.equalsIgnoreCase(questionList.get(i).getCorrectOption())) {
                                     System.out.println("Correct, you have earned #" + String.valueOf(cashPrize));
-                                    amtEarned += cashPrize;
+                                    amtEarned = cashPrize;
                                     counterCorrect++;
                                     running2 = false;
                                 } else {
@@ -182,7 +197,7 @@ public class Main {
                                             if (counterCorrectSwapped > counterCorrect){
                                                 System.out.println("Yay, you got the answer!");
                                                 System.out.println("You have earned #" + String.valueOf(cashPrize));
-                                                amtEarned += cashPrize;
+                                                amtEarned = cashPrize;
                                                 counterCorrect++;
                                                 running2 = false;
                                                 break;
@@ -192,7 +207,12 @@ public class Main {
                                             }
                                         } else if(swap == 0){
                                             System.out.println("Alright, thanks for playing!");
-                                            System.out.println("Total amount earned by " + user.getName() + " is #" + amtEarned);
+                                            if(safetyNet){
+                                                amtEarned = safetyNetAmt;
+                                            } else {
+                                                amtEarned = 0;
+                                            }
+                                            System.out.println("Amount earned by " + user.getName() + " is #" + amtEarned);
                                             System.out.println("Returning to main menu...");
                                             counterWrong++;
                                             break outerLoop;
@@ -200,6 +220,11 @@ public class Main {
                                     }
                                     else {
                                         System.out.println("You are not eligible for the swap lifeline.");
+                                        if(safetyNet){
+                                            amtEarned = safetyNetAmt;
+                                        } else {
+                                            amtEarned = 0;
+                                        }
                                         System.out.println("Total Amount Earned: #" + amtEarned);
                                         System.out.println("Returning to main menu...");
 //                                        running2 = false;
@@ -212,7 +237,7 @@ public class Main {
 
                 }
 
-                if(counter == 15 || counterCorrect == 15){
+                if(counter == 14 || counterCorrect == 14){
                     System.out.println("You have reached the end of the game, congratulations!");
                     System.out.println("Total amount earned by " + user.getName() + " is #" + amtEarned);
                     exitAll = false;
@@ -220,6 +245,18 @@ public class Main {
             }
         }
         userFile.createUserFile(userName, counterCorrect, amtEarned);
+    }
+
+    private static int setSafetyNet(int i){
+        int cashPrize = 0;
+        if(i == 5){
+            System.out.println("======YOU HAVE REACHED A SAFETY NET AMOUNT OF #30,000======");
+            cashPrize = 30000;
+        } else if (i == 10){
+            System.out.println("======YOU HAVE REACHED A SAFETY NET AMOUNT OF #500,000======");
+            cashPrize = 500000;
+        }
+        return cashPrize;
     }
 
     private static int swapQuestion(Scanner reader, List<Question> questionList, int i, int counterCorrect) {
@@ -270,8 +307,8 @@ public class Main {
         System.out.println("C. " + questionList.get(i).getOptionC());
         System.out.println("D. " + questionList.get(i).getOptionD());
     }
-
 //    function to return correct answer based on option chosen as users
+
     private static String checkOption(List<Question> questionList, String userAnswer, int i){
         return switch (userAnswer) {
             case "A" -> questionList.get(i).getOptionA();
@@ -281,7 +318,7 @@ public class Main {
             default -> "Invalid entry";
         };
     }
-
+    
     private static int displaySwapMenu(){
         Scanner reader = new Scanner(System.in);
         System.out.println("Would you like to swap your question?[Yes/No]");
