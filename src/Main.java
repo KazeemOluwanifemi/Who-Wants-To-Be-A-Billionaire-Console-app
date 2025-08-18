@@ -134,7 +134,7 @@ public class Main {
             for(int i = 0; i < questionList.size(); i++){
                 int cashPrize = theQuestion.cashPrize(i);
 
-//                conditional calling of safety new function that returns the cash prize based on the safety net
+//                conditional calling of safety net function that returns the cash prize based on the safety net
 //                re-assign cashPrize variable to the result of that method in an if statement
                 if(i == 5 || i == 10){
                     cashPrize = setSafetyNet(i);
@@ -150,7 +150,7 @@ public class Main {
                 counter++;
 //                process and validate the input using a function
                 if(userAnswerCheck.equalsIgnoreCase(questionList.get(i).getCorrectOption())){
-                    System.out.println("Correct, you have earned #" + String.valueOf(cashPrize));
+                    System.out.println("Correct, you have earned #" + cashPrize);
                     amtEarned = cashPrize;
                     counterCorrect++;
                 } else {
