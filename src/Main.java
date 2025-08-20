@@ -131,6 +131,8 @@ public class Main {
         while(exitAll){
 //            System.out.println("CHECK: counter=" + counter + ", exitAll=" + exitAll);
             Collections.shuffle(questionList);
+            List<Question> shuffledQuestions = questionList;
+
             for(int i = 0; i < questionList.size(); i++){
                 int cashPrize = theQuestion.cashPrize(i);
 
@@ -245,6 +247,24 @@ public class Main {
             }
         }
         userFile.createUserFile(userName, counterCorrect, amtEarned);
+    }
+
+    private static void lifeline5050(String userDecision, int index, List<Question> shuffledList){
+        boolean running = true;
+
+        while(running){
+            switch(userDecision) {
+                case "":
+                    System.out.println("Input cannot be empty");
+                case "N":
+                    System.out.println("You have refused to use your 50/50 lifeline");
+                case "Yes","Y":
+                    System.out.println(shuffledList.get(index).getQuestion());
+                    System.out.println("A. " + shuffledList.get(index).getCorrectOption());
+                    System.out.println("B. " + shuffledList.get(index).getTrickOption());
+                    running = false;
+            }
+        }
     }
 
     private static int setSafetyNet(int i){

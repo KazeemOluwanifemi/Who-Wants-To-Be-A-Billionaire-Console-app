@@ -1,50 +1,51 @@
-What color do you get when you mix red and white?,Pink,Orange,Brown,Purple,Pink
-How many legs does a spider have?,6,8,10,12,8
-What planet do we live on?,Venus,Mars,Earth,Jupiter,Earth
-How many continents are there in the world?,5,6,7,8,7
-Which animal is known for its black and white stripes?,Leopard,Zebra,Tiger,Panda,Zebra
-Who is known as the “Father of Computers”?,Alan Turing,Charles Babbage,Bill Gates,Steve Jobs,Charles Babbage
-What is the longest river in the world?,Amazon,Yangtze,Mississippi,Nile,Nile
-In which country is the Great Barrier Reef located?,South Africa,Brazil,Australia,Mexico,Australia
-Which gas is most abundant in the Earth’s atmosphere?,Oxygen,Nitrogen,Carbon dioxide,Hydrogen,Nitrogen
-Who discovered penicillin?,Marie Curie,Albert Einstein,Alexander Fleming,Isaac Newton,Alexander Fleming
-What is the capital of Kazakhstan?,Tashkent,Astana,Baku,Ulaanbaatar,Astana
-Which Nobel Prize-winning physicist developed the uncertainty principle?,Niels Bohr,Erwin Schrödinger,Werner Heisenberg,Max Planck,Werner Heisenberg
-Which artist is famous for the mural 'Guernica'?,Salvador Dalí,Pablo Picasso,Henri Matisse,Diego Rivera,Pablo Picasso
-What is the smallest country in the world by land area?,Monaco,Vatican City,Liechtenstein,San Marino,Vatican City
-Which ancient civilization built the Machu Picchu complex in Peru?,Aztec,Maya,Inca,Olmec,Inca
-What is the largest planet in our solar system?,Earth,Saturn,Jupiter,Mars,Jupiter
-What is the chemical symbol for gold?,Ag,Au,Pt,Go,Au
-Which ocean is the largest?,Atlantic,Pacific,Indian,Arctic,Pacific
-What is the capital city of Japan?,Kyoto,Seoul,Tokyo,Osaka,Tokyo
-Which country is famous for the Eiffel Tower?,Italy,France,Spain,Belgium,France
-What is the hardest natural substance on Earth?,Steel,Diamond,Quartz,Granite,Diamond
-Who painted the Mona Lisa?,Vincent van Gogh,Leonardo da Vinci,Michelangelo,Raphael,Leonardo da Vinci
-How many sides does a hexagon have?,5,6,7,8,6
-Which instrument has 88 keys?,Guitar,Violin,Piano,Flute,Piano
-What is the freezing point of water in Celsius?,0,32,100,-1,0
-Which gas do plants absorb from the atmosphere?,Oxygen,Carbon dioxide,Nitrogen,Hydrogen,Carbon dioxide
-In which country did the Olympic Games originate?,Italy,Greece,France,China,Greece
-What is the capital of Canada?,Toronto,Ottawa,Montreal,Vancouver,Ottawa
-Which planet is known as the Red Planet?,Mars,Jupiter,Venus,Saturn,Mars
-What is the largest mammal in the world?,African Elephant,Blue Whale,Hippopotamus,Orca,Blue Whale
-Which scientist developed the theory of relativity?,Isaac Newton,Niels Bohr,Albert Einstein,Galileo Galilei,Albert Einstein
-What is the main ingredient in guacamole?,Avocado,Cucumber,Peas,Spinach,Avocado
-What is the capital of Egypt?,Cairo,Alexandria,Luxor,Aswan,Cairo
-Which planet has the most moons?,Saturn,Jupiter,Mars,Neptune,Saturn
-Who wrote 'Romeo and Juliet'?,Charles Dickens,William Shakespeare,Jane Austen,Mark Twain,William Shakespeare
-What is the tallest mountain in the world?,K2,Everest,Kangchenjunga,Lhotse,Everest
-Which metal is liquid at room temperature?,Mercury,Iron,Aluminum,Silver,Mercury
-Which organ pumps blood through the body?,Liver,Heart,Lungs,Kidney,Heart
-What is the capital of Italy?,Rome,Milan,Florence,Naples,Rome
-Which gas do humans exhale?,Oxygen,Carbon dioxide,Nitrogen,Helium,Carbon dioxide
-What is the fastest land animal?,Cheetah,Lion,Leopard,Horse,Cheetah
-Which country is known as the Land of the Rising Sun?,China,Japan,Thailand,Philippines,Japan
-Which blood type is known as the universal donor?,O-,O+,AB-,AB+,O-
-Who was the first man to walk on the moon?,Buzz Aldrin,Neil Armstrong,Yuri Gagarin,Michael Collins,Neil Armstrong
-What is the capital of South Africa?,Pretoria,Cape Town,Johannesburg,Durban,Pretoria
-What is H2O more commonly known as?,Salt,Water,Hydrogen,Acid,Water
-What is the largest desert in the world?,Sahara,Arabian,Gobi,Antarctic,Antarctic
-Which instrument has strings and is played with a bow?,Drum,Violin,Trumpet,Flute,Violin
-What is the capital of Russia?,Moscow,St. Petersburg,Kiev,Minsk,Moscow
-What is the smallest prime number?,0,1,2,3,2
+Question,Option1,Option2,Option3,Option4,Answer,FalseButPlausible
+What color do you get when you mix red and white?,Pink,Light Red,Orange,Purple,Pink,Light Red
+How many legs does a spider have?,6,8,10,12,8,6
+What planet do we live on?,Venus,Mars,Earth,Mercury,Earth,Mars
+How many continents are there in the world?,5,6,7,9,7,6
+Which animal is known for its black and white stripes?,Leopard,Zebra,Tiger,Okapi,Zebra,Okapi
+Who is known as the “Father of Computers”?,Alan Turing,Charles Babbage,Bill Gates,John von Neumann,Charles Babbage,Alan Turing
+What is the longest river in the world?,Amazon,Yangtze,Mississippi,Congo,Nile,Amazon
+In which country is the Great Barrier Reef located?,South Africa,Brazil,Australia,New Zealand,Australia,New Zealand
+Which gas is most abundant in the Earth’s atmosphere?,Oxygen,Nitrogen,Carbon dioxide,Argon,Nitrogen,Oxygen
+Who discovered penicillin?,Marie Curie,Albert Einstein,Alexander Fleming,Louis Pasteur,Alexander Fleming,Louis Pasteur
+What is the capital of Kazakhstan?,Tashkent,Astana,Baku,Almaty,Astana,Almaty
+Which Nobel Prize-winning physicist developed the uncertainty principle?,Niels Bohr,Erwin Schrödinger,Werner Heisenberg,Richard Feynman,Werner Heisenberg,Niels Bohr
+Which artist is famous for the mural 'Guernica'?,Salvador Dalí,Pablo Picasso,Henri Matisse,Francisco Goya,Pablo Picasso,Francisco Goya
+What is the smallest country in the world by land area?,Monaco,Vatican City,Liechtenstein,Andorra,Vatican City,Monaco
+Which ancient civilization built the Machu Picchu complex in Peru?,Aztec,Maya,Inca,Toltec,Inca,Maya
+What is the largest planet in our solar system?,Earth,Saturn,Jupiter,Uranus,Jupiter,Saturn
+What is the chemical symbol for gold?,Ag,Au,Pt,Gd,Au,Ag
+Which ocean is the largest?,Atlantic,Pacific,Indian,Southern,Pacific,Atlantic
+What is the capital city of Japan?,Kyoto,Seoul,Tokyo,Hiroshima,Tokyo,Kyoto
+Which country is famous for the Eiffel Tower?,Italy,France,Spain,Switzerland,France,Italy
+What is the hardest natural substance on Earth?,Steel,Diamond,Quartz,Obsidian,Diamond,Quartz
+Who painted the Mona Lisa?,Vincent van Gogh,Leonardo da Vinci,Michelangelo,Donatello,Leonardo da Vinci,Michelangelo
+How many sides does a hexagon have?,5,6,7,9,6,7
+Which instrument has 88 keys?,Guitar,Violin,Piano,Accordion,Piano,Accordion
+What is the freezing point of water in Celsius?,0,32,100,-10,0,32
+Which gas do plants absorb from the atmosphere?,Oxygen,Carbon dioxide,Nitrogen,Methane,Carbon dioxide,Oxygen
+In which country did the Olympic Games originate?,Italy,Greece,France,Turkey,Greece,Italy
+What is the capital of Canada?,Toronto,Ottawa,Montreal,Quebec City,Ottawa,Toronto
+Which planet is known as the Red Planet?,Mars,Jupiter,Venus,Neptune,Mars,Venus
+What is the largest mammal in the world?,African Elephant,Blue Whale,Hippopotamus,Whale Shark,Blue Whale,Whale Shark
+Which scientist developed the theory of relativity?,Isaac Newton,Niels Bohr,Albert Einstein,Max Planck,Albert Einstein,Isaac Newton
+What is the main ingredient in guacamole?,Avocado,Cucumber,Peas,Zucchini,Avocado,Peas
+What is the capital of Egypt?,Cairo,Alexandria,Luxor,Giza,Cairo,Alexandria
+Which planet has the most moons?,Saturn,Jupiter,Mars,Uranus,Saturn,Jupiter
+Who wrote 'Romeo and Juliet'?,Charles Dickens,William Shakespeare,Jane Austen,Geoffrey Chaucer,William Shakespeare,Geoffrey Chaucer
+What is the tallest mountain in the world?,K2,Everest,Kangchenjunga,Mont Blanc,Everest,K2
+Which metal is liquid at room temperature?,Mercury,Iron,Aluminum,Gallium,Mercury,Gallium
+Which organ pumps blood through the body?,Liver,Heart,Lungs,Stomach,Heart,Lungs
+What is the capital of Italy?,Rome,Milan,Florence,Venice,Rome,Milan
+Which gas do humans exhale?,Oxygen,Carbon dioxide,Nitrogen,Methane,Carbon dioxide,Oxygen
+What is the fastest land animal?,Cheetah,Lion,Leopard,Pronghorn Antelope,Cheetah,Pronghorn Antelope
+Which country is known as the Land of the Rising Sun?,China,Japan,Thailand,Korea,Japan,China
+Which blood type is known as the universal donor?,O-,O+,AB-,B-,O-,O+
+Who was the first man to walk on the moon?,Buzz Aldrin,Neil Armstrong,Yuri Gagarin,Alan Shepard,Neil Armstrong,Buzz Aldrin
+What is the capital of South Africa?,Pretoria,Cape Town,Johannesburg,Bloemfontein,Pretoria,Cape Town
+What is H2O more commonly known as?,Salt,Water,Hydrogen,Steam,Water,Steam
+What is the largest desert in the world?,Sahara,Arabian,Gobi,Kalahari,Antarctic,Sahara
+Which instrument has strings and is played with a bow?,Drum,Violin,Trumpet,Cello,Violin,Cello
+What is the capital of Russia?,Moscow,St. Petersburg,Kiev,Novgorod,Moscow,St. Petersburg
+What is the smallest prime number?,0,1,2,9,2,1
