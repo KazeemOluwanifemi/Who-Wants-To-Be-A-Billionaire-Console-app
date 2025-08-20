@@ -17,8 +17,9 @@ This project is currently under active development. Features may be incomplete o
 ## Roadmap
 
 - [x] **Swap Question Functionality:** Players can swap out a question they find difficult for a new one.
-- [ ] **Safety Net Functionality:** Implementation is in progress. Players will soon be able to secure a minimum guaranteed prize at certain milestones.
-- [ ] **Withdraw Earnings:** Players can withdraw their earned cash prize through a random generated code
+- [x] **Safety Net Functionality:** Implementation is in progress. Players will soon be able to secure a minimum guaranteed prize at certain milestones.
+- [x] **Withdraw Earnings:** Players can withdraw their earned cash prize through a random generated code
+- [ ] **Lifelines Functionality:** Players can use any lifeline available to them if a question is difficult to answer
 
 ## Contributing
 
