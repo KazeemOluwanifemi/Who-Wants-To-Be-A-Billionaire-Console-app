@@ -78,6 +78,29 @@ public class Main {
         }
     }
 
+
+    private static String displayLifelines(){
+        System.out.println("Press 'S' to swap your question or 'F' to activate the 50/50 lifeline[You can use each lifeline only once]");
+        System.out.println("NOTE: You can use each lifeline only once");
+
+        Scanner reader = new Scanner(System.in);
+
+        System.out.println("-> ");
+        String userDecision = reader.nextLine();
+        boolean running = true;
+        while(running){
+            System.out.println();
+            switch(userDecision) {
+                case "":
+                    System.out.println("Input cannot be empty");
+                case "F":
+
+
+            }
+        }
+        return userDecision;
+
+    }
     private static void displayRules(String userName) {
         System.out.println("Hello " + userName + ", welcome to Who Wants to Be a Millionaire!");
         System.out.println("Please pay attention to the following rules: ");
@@ -150,6 +173,7 @@ public class Main {
                 userAnswer = reader.nextLine().toUpperCase();
                 userAnswerCheck = checkOption(questionList, userAnswer, i);
                 counter++;
+
 //                process and validate the input using a function
                 if(userAnswerCheck.equalsIgnoreCase(questionList.get(i).getCorrectOption())){
                     System.out.println("Correct, you have earned #" + cashPrize);
