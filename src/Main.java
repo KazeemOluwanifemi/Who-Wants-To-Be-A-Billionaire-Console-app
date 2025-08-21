@@ -98,6 +98,8 @@ public class Main {
                 System.out.println("Correct!");
                 user.setAmtEarned(questionsList.get(index).cashPrize(index));
                 System.out.println("You have earned: #" + user.getAmtEarned());
+                System.out.println();
+                setSafetyNet(user, index, questionsList);
             } else {
                 System.out.println("Wrong! The correct answer was: " + questionsList.get(index).getCorrectOption());
                 endGame(user, userFile);
@@ -128,6 +130,29 @@ public class Main {
         userFile.displayUserStats(user);
         System.out.println("========================================================");
         System.out.println();
+    }
+
+//    this method sets the safety net
+    public static int setSafetyNet(User user, int index, List<Question> questionsList) {
+        int safetyNet = 0;
+        if (user.getCrtAnswers() >= 5) {
+            System.out.println("========================================================");
+            user.setAmtEarned(questionsList.get(index).cashPrize(4));
+            System.out.println("Congratulations! You have reached the first safety net.");
+            System.out.println("You have earned a safety net of: #" + user.getAmtEarned());
+            System.out.println("========================================================");
+            safetyNet = 1;
+        } else if(user.getCrtAnswers() >= 10) {
+            System.out.println("========================================================");
+            user.setAmtEarned(questionsList.get(index).cashPrize(9));
+            System.out.println("Congratulations! You have reached the second safety net.");
+            System.out.println("You have earned a safety net of: #" + user.getAmtEarned());
+            System.out.println("========================================================");
+            safetyNet = 2;
+        } else {
+            System.out.println("You have not reached any safety net yet.");
+        }
+        return safetyNet;
     }
 
 
