@@ -5,8 +5,9 @@ import java.util.Scanner;
 public class User{
     private String name;
     private int crtAnswers;
-    private int wrongAnswers;
     private double amtEarned;
+    private String token;
+
 
     public String initializeUserName(){
         Scanner reader = new Scanner(System.in);
@@ -28,6 +29,14 @@ public class User{
         this.name = name;
     }
 
+    public void setUserToken(String token) {
+        this.token = token;
+    }
+
+    public String getUserToken() {
+        return this.token;
+    }
+
     public String getName() {
         return this.name;
     }
@@ -38,14 +47,6 @@ public class User{
 
     public void setCrtAnswers(int crtAnswers) {
         this.crtAnswers = crtAnswers;
-    }
-
-    public int getWrongAnswers() {
-        return wrongAnswers;
-    }
-
-    public void setWrongAnswers(int wrongAnswers) {
-        this.wrongAnswers = wrongAnswers;
     }
 
     public double getAmtEarned() {

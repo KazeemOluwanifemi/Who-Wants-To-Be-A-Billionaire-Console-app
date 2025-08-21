@@ -10,9 +10,9 @@ import java.time.format.DateTimeFormatter;
 public class UserFile {
     private String dateTime;
 
-    public void createUserFile(String userName, int crtAnswers, double amtEarned){
+    public void createAndWriteToUserFile(User user){
 //        generate cashout token per session
-        String token = RandomTokenGenerator.generator(10);
+        user.setUserToken(RandomTokenGenerator.generator(10));
 
 //        store the date and time of playing to make it easier to access
         LocalDateTime dateTime = LocalDateTime.now();
@@ -23,7 +23,7 @@ public class UserFile {
         //        creates the file
         int fileStatus = 1;
         try{
-            File userFile = new File(userName + ".txt");
+            File userFile = new File(user.getName() + ".txt");
             if(userFile.createNewFile()){
                 fileStatus = 1;
             } else{
@@ -39,15 +39,15 @@ public class UserFile {
 //        write user stats to file or update the file based on if the file exists before or not
         if(fileStatus == 1){
             try{
-                FileWriter fileWriter = new FileWriter(userName + ".txt");
+                FileWriter fileWriter = new FileWriter(user.getName() + ".txt");
                 BufferedWriter bufferedFileWriter = new BufferedWriter(fileWriter);
 
                 bufferedFileWriter.write("Date and time of playing: " + formattedDateTime + "\n");
-                bufferedFileWriter.write("Username: " + userName + "\n");
-                bufferedFileWriter.write("Number of correctly answered questions: " + crtAnswers + "\n");
-                bufferedFileWriter.write("Amount earned by " + userName + " is: #" + amtEarned + "\n");
+                bufferedFileWriter.write("Username: " + user.getName() + "\n");
+                bufferedFileWriter.write("Number of correctly answered questions: " + user.getCrtAnswers() + "\n");
+                bufferedFileWriter.write("Amount earned by " + user.getName() + " is: #" + user.getAmtEarned() + "\n");
                 bufferedFileWriter.write("--------------------------------------------------------------");
-                bufferedFileWriter.write("Checkout token for this game session is: " + token + "\n");
+                bufferedFileWriter.write("Checkout token for this game session is: " + user.getUserToken() + "\n");
 
                 bufferedFileWriter.close();
             } catch(IOException e){
@@ -56,24 +56,31 @@ public class UserFile {
             }
         } else if(fileStatus == 0){
             try{
-                FileWriter fileWriter = new FileWriter(userName + ".txt");
+                FileWriter fileWriter = new FileWriter(user.getName() + ".txt");
                 BufferedWriter bufferedFileWriter = new BufferedWriter(fileWriter);
 
                 bufferedFileWriter.write("Date and time of playing: " + formattedDateTime + "\n");
-                bufferedFileWriter.append("Username: ").append(userName).append("\n");
-                bufferedFileWriter.append("Number of correctly answered questions: ").append(String.valueOf(crtAnswers)).append("\n");
-                bufferedFileWriter.append("Amount earned by ").append(userName).append(" is: #").append(String.valueOf(amtEarned)).append("\n");
-                bufferedFileWriter.write("Checkout token for this game session is: " + token + "\n");
+                bufferedFileWriter.append("Username: ").append(user.getName()).append("\n");
+                bufferedFileWriter.append("Number of correctly answered questions: ").append(String.valueOf(user.getCrtAnswers())).append("\n");
+                bufferedFileWriter.append("Amount earned by ").append(user.getName()).append(" is: #").append(String.valueOf(user.getAmtEarned())).append("\n");
+                bufferedFileWriter.write("Checkout token for this game session is: " + user.getUserToken() + "\n");
 
                 bufferedFileWriter.close();
 
-                System.out.println("Use this token to withdraw your earning for this game session: " + token);
+                System.out.println("Use this token to withdraw your earning for this game session: " + user.getUserToken());
             } catch(IOException e){
                 System.out.println("An error occurred while writing to file");
                 e.printStackTrace();
             }
         }
 
+    }
+
+    public void displayUserStats(User user) {
+        System.out.println("User Name: " + user.getName());
+        System.out.println("Correct Answers: " + user.getCrtAnswers());
+        System.out.println("Amount Earned: #" + user.getAmtEarned());
+        System.out.println("Checkout Token: " + user.getUserToken());
     }
 
 }
