@@ -114,12 +114,15 @@ public class Main {
                             lifeLine = "F";
                             displayLifelineIllegibilityMessage(lifeLine);
                             System.out.println("50/50 lifeline activated! Two incorrect options have been removed.");
+                            System.out.println();
+                            lifeline5050(index, shuffledQuestions, reader, user, userFile);
                             running = false;
                             break;
                         case "2":
                             lifeLine = "S";
                             displayLifelineIllegibilityMessage(lifeLine);
                             System.out.println("Swap question lifeline activated! The question has been swapped.");
+                            System.out.println();
                             swapQuestion(questionsList, index, reader, user, userFile);
                             running = false;
                             break;
