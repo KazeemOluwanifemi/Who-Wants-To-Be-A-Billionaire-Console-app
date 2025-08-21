@@ -12,6 +12,7 @@ public class Question {
     private String optionD;
     private String correctOption;
     private int cashPrize;
+    private String trickOption;
 
     //    method to implement loading the file contents functionality
     public List<Question> getQuestionDet(String filename) {
@@ -24,7 +25,7 @@ public class Question {
 
                 String[] pieces = line.split(",");
 
-                if (pieces.length < 6) {
+                if (pieces.length < 7) {
                     System.out.println("There is a faulty line in the question file");
                 } else {
                     Question theQuestion = new Question();
@@ -34,6 +35,7 @@ public class Question {
                     theQuestion.setOptionC(pieces[3].trim());
                     theQuestion.setOptionD(pieces[4].trim());
                     theQuestion.setCorrectOption(pieces[5].trim());
+                    theQuestion.setTrickOption(pieces[6].trim());
                     questions.add(theQuestion);
                 }
             }
@@ -71,6 +73,14 @@ public class Question {
 
 
 //    getters and setters
+    public void setTrickOption(String trickOption){
+        this.trickOption = trickOption;
+    }
+
+    public String getTrickOption() {
+        return trickOption;
+    }
+
     public String getQuestion() {
         return question;
     }
