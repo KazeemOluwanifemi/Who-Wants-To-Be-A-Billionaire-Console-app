@@ -30,11 +30,10 @@ public class Main {
 //                return a method's functionality based on user's input
                 if (playOrExitGame == 1) {
                     System.out.println("Alright then, let's play!");
+                    System.out.println();
                     user.initializeUserName();
                     displayRules(user);
                     loopThroughQuestions(questionList, user);
-
-                    System.out.println("Okay, " + user.getName() + ", let's get started!");
                 } else if(playOrExitGame == 2) {
                     System.out.println("Exiting game now.");
                     running = false;
@@ -51,19 +50,23 @@ public class Main {
         System.out.println("Welcome to Who Wants to Be a Millionaire!");
         System.out.println("1. Play Game");
         System.out.println("2. Exit Game");
-        System.out.print("Please enter your choice: ");
-        System.out.println("-> ");
+        System.out.println("Please enter your choice: ");
+        System.out.print("-> ");
     }
 
 //    This method displays the rules of the game to the user
     public static void displayRules(User user){
+        System.out.println();
         System.out.println("Welcome " + user.getName() + " to Who Wants to Be a Millionaire!");
+        System.out.println("========================================================");
         System.out.println("Here are the rules of the game:");
         System.out.println("1. You will be asked a series of questions.");
         System.out.println("2. Each question has four options, and you must choose the correct one.");
         System.out.println("3. You can use lifelines if you get stuck.");
         System.out.println("4. The game ends when you answer all questions or choose to quit.");
         System.out.println("5. Good luck!");
+        System.out.println("========================================================");
+        System.out.println();
     }
 
 //    this method displays current question
@@ -78,6 +81,7 @@ public class Main {
 
 //    this method loops through questions
     public static void loopThroughQuestions(List<Question> questionsList, User user) {
+        UserFile userFile = new UserFile();
         Collections.shuffle(questionsList);
         List<Question> shuffledQuestions = questionsList;
 
@@ -90,21 +94,18 @@ public class Main {
             String optionValue = checkOption(questionsList.get(index), userAnswer);
 
             if (userAnswer.equals(questionsList.get(index).getCorrectOption()) || optionValue.equals(questionsList.get(index).getCorrectOption())) {
+                user.setCrtAnswers(correctAnswers++);
                 System.out.println("Correct!");
-                correctAnswers++;
                 user.setAmtEarned(questionsList.get(index).cashPrize(index));
                 System.out.println("You have earned: #" + user.getAmtEarned());
             } else {
                 System.out.println("Wrong! The correct answer was: " + questionsList.get(index).getCorrectOption());
-                endGame(user);
+                endGame(user, userFile);
                 break;
             }
         }
-
-        user.setCrtAnswers(correctAnswers);
-
-        UserFile userFile = new UserFile();
         userFile.createAndWriteToUserFile(user);
+        System.out.println();
     }
 
 //    this method returns the option value based on the user's input
@@ -119,12 +120,14 @@ public class Main {
     }
 
 //    this method ends the game
-    public static void endGame(User user) {
+    public static void endGame(User user, UserFile userFile) {
         System.out.println();
-        System.out.println("========================================================");
         System.out.println("Thank you for playing, " + user.getName() + "!");
-        System.out.println("You answered " + user.getCrtAnswers() + " questions correctly.");
-        System.out.println("Goodbye!");
+        System.out.println("These are your stats for this game session:");
+        System.out.println("========================================================");
+        userFile.displayUserStats(user);
+        System.out.println("========================================================");
+        System.out.println();
     }
 
 

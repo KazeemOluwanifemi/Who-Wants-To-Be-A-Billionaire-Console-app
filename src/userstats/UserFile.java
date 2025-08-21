@@ -11,9 +11,6 @@ public class UserFile {
     private String dateTime;
 
     public void createAndWriteToUserFile(User user){
-//        generate cashout token per session
-        user.setUserToken(RandomTokenGenerator.generator(10));
-
 //        store the date and time of playing to make it easier to access
         LocalDateTime dateTime = LocalDateTime.now();
         DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
@@ -66,8 +63,6 @@ public class UserFile {
                 bufferedFileWriter.write("Checkout token for this game session is: " + user.getUserToken() + "\n");
 
                 bufferedFileWriter.close();
-
-                System.out.println("Use this token to withdraw your earning for this game session: " + user.getUserToken());
             } catch(IOException e){
                 System.out.println("An error occurred while writing to file");
                 e.printStackTrace();
@@ -77,10 +72,14 @@ public class UserFile {
     }
 
     public void displayUserStats(User user) {
+        user.setUserToken(RandomTokenGenerator.generator(10));
         System.out.println("User Name: " + user.getName());
         System.out.println("Correct Answers: " + user.getCrtAnswers());
         System.out.println("Amount Earned: #" + user.getAmtEarned());
         System.out.println("Checkout Token: " + user.getUserToken());
     }
+
+//    this method sets the safety net
+
 
 }
