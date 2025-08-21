@@ -62,7 +62,7 @@ public class Main {
         System.out.println("Here are the rules of the game:");
         System.out.println("1. You will be asked a series of questions.");
         System.out.println("2. Each question has four options, and you must choose the correct one.");
-        System.out.println("3. You can use lifelines if you get stuck.");
+        System.out.println("3. You can use key [L] to choose from your available lifelines if you get stuck.");
         System.out.println("4. The game ends when you answer all questions or choose to quit.");
         System.out.println("5. Good luck!");
         System.out.println("========================================================");
@@ -100,9 +100,34 @@ public class Main {
                 System.out.println("You have earned: #" + user.getAmtEarned());
                 System.out.println();
                 setSafetyNet(user, index, questionsList);
-            } else {
+            } else if(userAnswer.equalsIgnoreCase("L")){
+                String lifeLine = "L";
+                displayLifelineMenu();
+                String lifelineChoice = reader.nextLine().trim();
+                switch (lifelineChoice) {
+                    case "1":
+                        lifeLine = "F";
+                        displayLifelineIllegibilityMessage(lifeLine);
+                        System.out.println("50/50 lifeline activated! Two incorrect options have been removed.");
+                        break;
+                    case "2":
+                        lifeLine = "S";
+                        displayLifelineIllegibilityMessage(lifeLine);
+                        System.out.println("Swap question lifeline activated! The question has been swapped.");
+                        swapQuestion(questionsList, index, reader, user);
+                        break;
+                    case "3":
+                        lifeLine = "A";
+                        displayLifelineIllegibilityMessage(lifeLine);
+                        System.out.println("This feature is still under construction. Please try again later.");
+                        break;
+                    default:
+                        System.out.println("Invalid choice, please try again.");
+                }
+            }
+            else {
                 System.out.println("Wrong! The correct answer was: " + questionsList.get(index).getCorrectOption());
-                endGame(user, userFile);
+                endGameMessage(user, userFile);
                 break;
             }
         }
@@ -122,7 +147,7 @@ public class Main {
     }
 
 //    this method ends the game
-    public static void endGame(User user, UserFile userFile) {
+    public static void endGameMessage(User user, UserFile userFile) {
         System.out.println();
         System.out.println("Thank you for playing, " + user.getName() + "!");
         System.out.println("These are your stats for this game session:");
@@ -133,7 +158,7 @@ public class Main {
     }
 
 //    this method sets the safety net
-    public static int setSafetyNet(User user, int index, List<Question> questionsList) {
+    public static void setSafetyNet(User user, int index, List<Question> questionsList) {
         int safetyNet = 0;
         if (user.getCrtAnswers() >= 5) {
             System.out.println("========================================================");
@@ -152,9 +177,46 @@ public class Main {
         } else {
             System.out.println("You have not reached any safety net yet.");
         }
-        return safetyNet;
     }
 
+//    this function displays lifeline menu
+    public static void displayLifelineMenu() {
+        System.out.println("Your available lifelines: ");
+        System.out.println("1. 50/50");
+        System.out.println("2. Swap question");
+        System.out.println("3. Ask the Audience");
 
+        System.out.print("Please enter your choice: ");
+    }
+
+//    Swap method
+    public static void swapQuestion(List<Question> questionsList, int index, Scanner reader, User user) {
+        displayQuestion(questionsList.get(index + 2));
+        String userAnswerSwapped = reader.nextLine().trim().toUpperCase();
+        String optionValueSwapped = checkOption(questionsList.get(index + 2), userAnswerSwapped);
+
+        if(userAnswerSwapped.equals(questionsList.get(index + 2).getCorrectOption()) || optionValueSwapped.equals(questionsList.get(index + 2).getCorrectOption())) {
+            user.setCrtAnswers(user.getCrtAnswers() + 1);
+            System.out.println("Correct!");
+            user.setAmtEarned(questionsList.get(index + 2).cashPrize(index + 2));
+            System.out.println("You have earned: #" + user.getAmtEarned());
+            System.out.println();
+        } else {
+            System.out.println("Wrong! The correct answer was: " + questionsList.get(index + 2).getCorrectOption());
+            endGameMessage(user, new UserFile());
+        }
+
+    }
+
+//    display lifeline illegibility message
+    public static void displayLifelineIllegibilityMessage(String status) {
+        if(status.equalsIgnoreCase("F")){
+            System.out.println("You have already used the 50/50 lifeline.");
+        } else if(status.equalsIgnoreCase("S")){
+            System.out.println("You have already used the Swap question lifeline.");
+        } else if(status.equalsIgnoreCase("A")){
+            System.out.println("You have already used the Ask the Audience lifeline.");
+        }
+    }
 
 }
