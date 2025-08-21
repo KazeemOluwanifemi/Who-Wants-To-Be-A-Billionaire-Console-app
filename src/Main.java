@@ -102,27 +102,34 @@ public class Main {
                 setSafetyNet(user, index, questionsList);
             } else if(userAnswer.equalsIgnoreCase("L")){
                 String lifeLine = "L";
-                displayLifelineMenu();
-                String lifelineChoice = reader.nextLine().trim();
-                switch (lifelineChoice) {
-                    case "1":
-                        lifeLine = "F";
-                        displayLifelineIllegibilityMessage(lifeLine);
-                        System.out.println("50/50 lifeline activated! Two incorrect options have been removed.");
-                        break;
-                    case "2":
-                        lifeLine = "S";
-                        displayLifelineIllegibilityMessage(lifeLine);
-                        System.out.println("Swap question lifeline activated! The question has been swapped.");
-                        swapQuestion(questionsList, index, reader, user);
-                        break;
-                    case "3":
-                        lifeLine = "A";
-                        displayLifelineIllegibilityMessage(lifeLine);
-                        System.out.println("This feature is still under construction. Please try again later.");
-                        break;
-                    default:
-                        System.out.println("Invalid choice, please try again.");
+                boolean running = true;
+
+                while (running) {
+                    displayLifelineMenu();
+                    String lifelineChoice = reader.nextLine().trim();
+                    switch (lifelineChoice) {
+                        case "":
+                            System.out.println("Input cannot be empty. Please try again.");
+                        case "1":
+                            lifeLine = "F";
+                            displayLifelineIllegibilityMessage(lifeLine);
+                            System.out.println("50/50 lifeline activated! Two incorrect options have been removed.");
+                            running = false;
+                            break;
+                        case "2":
+                            lifeLine = "S";
+                            displayLifelineIllegibilityMessage(lifeLine);
+                            System.out.println("Swap question lifeline activated! The question has been swapped.");
+                            swapQuestion(questionsList, index, reader, user, userFile);
+                            running = false;
+                            break;
+                        case "3":
+                            lifeLine = "A";
+                            displayLifelineIllegibilityMessage(lifeLine);
+                            System.out.println("This feature is still under construction. Please try again later.");
+                            running = false;
+                            break;
+                    }
                 }
             }
             else {
@@ -149,6 +156,7 @@ public class Main {
 //    this method ends the game
     public static void endGameMessage(User user, UserFile userFile) {
         System.out.println();
+        System.out.println("Game Over!");
         System.out.println("Thank you for playing, " + user.getName() + "!");
         System.out.println("These are your stats for this game session:");
         System.out.println("========================================================");
@@ -190,7 +198,7 @@ public class Main {
     }
 
 //    Swap method
-    public static void swapQuestion(List<Question> questionsList, int index, Scanner reader, User user) {
+    public static void swapQuestion(List<Question> questionsList, int index, Scanner reader, User user, UserFile userFile) {
         displayQuestion(questionsList.get(index + 2));
         String userAnswerSwapped = reader.nextLine().trim().toUpperCase();
         String optionValueSwapped = checkOption(questionsList.get(index + 2), userAnswerSwapped);
@@ -203,10 +211,36 @@ public class Main {
             System.out.println();
         } else {
             System.out.println("Wrong! The correct answer was: " + questionsList.get(index + 2).getCorrectOption());
-            endGameMessage(user, new UserFile());
+            endGameMessage(user, userFile);
         }
-
+        System.out.println();
+        System.out.println("You have used the Swap question lifeline.");
+        System.out.println("You can no longer use this lifeline again.");
+        System.out.println();
     }
+
+//    50/50 lifeline method
+private static void lifeline5050(int index, List<Question> shuffledList, Scanner reader, User user, UserFile userFile){
+    System.out.println(shuffledList.get(index).getQuestion());
+    System.out.println("A. " + shuffledList.get(index).getCorrectOption());
+    System.out.println("B. " + shuffledList.get(index).getTrickOption());
+
+    System.out.print("Please enter your answer (A or B): ");
+    String userAnswer = reader.nextLine().trim().toUpperCase();
+    if (userAnswer.equals(shuffledList.get(index).getCorrectOption()) || userAnswer.equals(shuffledList.get(index).getTrickOption())) {
+        user.setAmtEarned(shuffledList.get(index).cashPrize(index));
+        user.setCrtAnswers(user.getCrtAnswers() + 1);
+        System.out.println("Correct!");
+        System.out.println("You have earned: #" + user.getAmtEarned());
+    } else {
+        System.out.println("Wrong! The correct answer was: " + shuffledList.get(index).getCorrectOption());
+        endGameMessage(user, userFile);
+    }
+    System.out.println();
+    System.out.println("You have used the 50/50 lifeline.");
+    System.out.println("You can no longer use this lifeline again.");
+    System.out.println();
+}
 
 //    display lifeline illegibility message
     public static void displayLifelineIllegibilityMessage(String status) {
