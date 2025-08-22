@@ -1,3 +1,5 @@
+package versions;
+
 import questionHandling.Question;
 import userstats.User;
 import userstats.UserFile;
@@ -6,7 +8,7 @@ import userstats.UserFile;
 import java.util.*;
 import java.util.List;
 
-public class Main {
+public class GameTerminal {
     public static void main(String[] args) {
 //        the main method only serves as the game initializer
         boolean running = true;
@@ -265,5 +267,4 @@ private static void lifeline5050(int index, List<Question> shuffledList, Scanner
             System.out.println("You have already used the Ask the Audience lifeline.");
         }
     }
-
 }
