@@ -21,7 +21,7 @@ public class UserFile {
         //        creates the file
         int fileStatus = 1;
         try{
-            File userFile = new File(parentDir,user.getName() + ".csv");
+            File userFile = new File(parentDir,user.getName() + ".txt");
             if(userFile.createNewFile()){
                 fileStatus = 1;
             } else{
@@ -45,7 +45,7 @@ public class UserFile {
                 sb.append("Amount earned by ").append(user.getName()).append(" is: #").append(amountEarned).append("\n");
                 sb.append("Checkout token for this game session is: ").append(user.getUserToken()).append("\n");
 
-                File userFile = new File(parentDir,user.getName() + ".csv");
+                File userFile = new File(parentDir,user.getName() + ".txt");
 
                 FileWriter fileWriter = new FileWriter(userFile);
                 BufferedWriter bufferedFileWriter = new BufferedWriter(fileWriter);
@@ -67,7 +67,7 @@ public class UserFile {
                 sb.append("Amount earned by ").append(user.getName()).append(" is: #").append(amountEarned).append("\n");
                 sb.append("Checkout token for this game session is: ").append(user.getUserToken()).append("\n");
 
-                File userFile = new File(parentDir,user.getName() + ".csv");
+                File userFile = new File(parentDir,user.getName() + ".txt");
                 FileWriter fileWriter = new FileWriter(userFile, true);
                 BufferedWriter bufferedFileWriter = new BufferedWriter(fileWriter);
 

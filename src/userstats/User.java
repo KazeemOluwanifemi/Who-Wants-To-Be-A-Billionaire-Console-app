@@ -9,14 +9,13 @@ public class User{
     private String token;
 
 
-    public String initializeUserName(){
+    public void initializeUserName(){
         Scanner reader = new Scanner(System.in);
         if (this.name == null || this.name.isEmpty()) {
             System.out.println("What is your name: ");
             System.out.print("-> ");
             this.name = reader.nextLine().trim();
         }
-        return this.name;
     }
 
     //        Use an arrayList to be able to iterate over the different items when used in a loop

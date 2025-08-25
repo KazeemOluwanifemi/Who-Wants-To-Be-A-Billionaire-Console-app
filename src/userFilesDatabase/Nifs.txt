@@ -3,3 +3,15 @@ Username: Nifs
 Number of correctly answered questions: 1
 Amount earned by Nifs is: #15000.0
 Checkout token for this game session is: d3r7bxb1zc
+
+Date and time of playing: 25-08-2025 13:41:01
+Username: Nifs
+Number of correctly answered questions: 4
+Amount earned by Nifs is: #20000
+Checkout token for this game session is: 7cfzljv7ms
+
+Date and time of playing: 25-08-2025 13:55:59
+Username: Nifs
+Number of correctly answered questions: 2
+Amount earned by Nifs is: #10000
+Checkout token for this game session is: ip6fuowg77
