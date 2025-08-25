@@ -14,13 +14,14 @@ public class UserFile {
 //        store the date and time of playing to make it easier to access
         LocalDateTime dateTime = LocalDateTime.now();
         DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        File parentDir = new File("src/userFilesDatabase");
 
         String formattedDateTime = dateTime.format(formatDateTime);
 
         //        creates the file
         int fileStatus = 1;
         try{
-            File userFile = new File(user.getName() + ".txt");
+            File userFile = new File(parentDir,user.getName() + ".csv");
             if(userFile.createNewFile()){
                 fileStatus = 1;
             } else{
@@ -32,19 +33,21 @@ public class UserFile {
             e.printStackTrace();
         }
 
-
 //        write user stats to file or update the file based on if the file exists before or not
         if(fileStatus == 1){
             try{
                 String amountEarned = String.valueOf(user.getAmtEarned());
                 StringBuilder sb = new StringBuilder();
+
                 sb.append("Date and time of playing: ").append(formattedDateTime).append("\n");
                 sb.append("Username: ").append(user.getName()).append("\n");
                 sb.append("Number of correctly answered questions: ").append(user.getCrtAnswers()).append("\n");
                 sb.append("Amount earned by ").append(user.getName()).append(" is: #").append(amountEarned).append("\n");
                 sb.append("Checkout token for this game session is: ").append(user.getUserToken()).append("\n");
 
-                FileWriter fileWriter = new FileWriter(user.getName() + ".txt");
+                File userFile = new File(parentDir,user.getName() + ".csv");
+
+                FileWriter fileWriter = new FileWriter(userFile);
                 BufferedWriter bufferedFileWriter = new BufferedWriter(fileWriter);
 
                 bufferedFileWriter.write(sb.toString());
@@ -54,7 +57,7 @@ public class UserFile {
                 System.out.println("An error occurred while writing to file");
                 e.printStackTrace();
             }
-        } else if(fileStatus == 0){
+        } else{
             try{
                 String amountEarned = String.valueOf(user.getAmtEarned());
                 StringBuilder sb = new StringBuilder();
@@ -64,9 +67,11 @@ public class UserFile {
                 sb.append("Amount earned by ").append(user.getName()).append(" is: #").append(amountEarned).append("\n");
                 sb.append("Checkout token for this game session is: ").append(user.getUserToken()).append("\n");
 
-                FileWriter fileWriter = new FileWriter(user.getName() + ".txt");
+                File userFile = new File(parentDir,user.getName() + ".csv");
+                FileWriter fileWriter = new FileWriter(userFile, true);
                 BufferedWriter bufferedFileWriter = new BufferedWriter(fileWriter);
 
+                bufferedFileWriter.newLine();
                 bufferedFileWriter.write(sb.toString());
 
 //                bufferedFileWriter.write("Date and time of playing: " + formattedDateTime + "\n");
@@ -74,7 +79,7 @@ public class UserFile {
 //                bufferedFileWriter.append("Number of correctly answered questions: ").append(String.valueOf(user.getCrtAnswers())).append("\n");
 //                bufferedFileWriter.append("Amount earned by ").append(user.getName()).append(" is: #").append(amountEarned).append("\n");
 //                bufferedFileWriter.write("Checkout token for this game session is: " + user.getUserToken() + "\n");
-//
+
                 bufferedFileWriter.close();
             } catch(IOException e){
                 System.out.println("An error occurred while writing to file");
@@ -90,8 +95,4 @@ public class UserFile {
         System.out.println("Amount Earned: #" + user.getAmtEarned());
         System.out.println("Checkout Token: " + user.getUserToken());
     }
-
-//    this method sets the safety net
-
-
 }

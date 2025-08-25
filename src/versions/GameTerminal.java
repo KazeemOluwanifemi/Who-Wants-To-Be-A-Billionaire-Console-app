@@ -207,15 +207,15 @@ public class GameTerminal {
 //    this method sets the safety net
     public static void setSafetyNet(User user, int index, List<Question> questionsList) {
         int safetyNet = 0;
-        if(user.getCrtAnswers() >=5 || user.getCrtAnswers() >= 10) {
-            if (user.getCrtAnswers() >= 10) {
+        if(user.getCrtAnswers() ==5 || user.getCrtAnswers() == 10) {
+            if (user.getCrtAnswers() == 10) {
                 System.out.println("========================================================");
                 user.setAmtEarned(questionsList.get(index).cashPrize(4));
                 System.out.println("Congratulations! You have reached the first safety net.");
                 System.out.println("You have earned a safety net of: #" + user.getAmtEarned());
                 System.out.println("========================================================");
                 safetyNet = 1;
-            } else if (user.getCrtAnswers() >= 5) {
+            } else if (user.getCrtAnswers() == 5) {
                 System.out.println("========================================================");
                 user.setAmtEarned(questionsList.get(index).cashPrize(9));
                 System.out.println("Congratulations! You have reached the second safety net.");
