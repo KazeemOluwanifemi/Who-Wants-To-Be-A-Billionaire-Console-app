@@ -465,4 +465,5 @@ public class GameGUI extends JFrame {
         // Back to menu
         cards.show(root, "menu");
     }
+
 }

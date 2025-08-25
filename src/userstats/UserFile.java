@@ -36,15 +36,18 @@ public class UserFile {
 //        write user stats to file or update the file based on if the file exists before or not
         if(fileStatus == 1){
             try{
+                String amountEarned = String.valueOf(user.getAmtEarned());
+                StringBuilder sb = new StringBuilder();
+                sb.append("Date and time of playing: ").append(formattedDateTime).append("\n");
+                sb.append("Username: ").append(user.getName()).append("\n");
+                sb.append("Number of correctly answered questions: ").append(user.getCrtAnswers()).append("\n");
+                sb.append("Amount earned by ").append(user.getName()).append(" is: #").append(amountEarned).append("\n");
+                sb.append("Checkout token for this game session is: ").append(user.getUserToken()).append("\n");
+
                 FileWriter fileWriter = new FileWriter(user.getName() + ".txt");
                 BufferedWriter bufferedFileWriter = new BufferedWriter(fileWriter);
 
-                bufferedFileWriter.write("Date and time of playing: " + formattedDateTime + "\n");
-                bufferedFileWriter.write("Username: " + user.getName() + "\n");
-                bufferedFileWriter.write("Number of correctly answered questions: " + user.getCrtAnswers() + "\n");
-                bufferedFileWriter.write("Amount earned by " + user.getName() + " is: #" + user.getAmtEarned() + "\n");
-                bufferedFileWriter.write("--------------------------------------------------------------");
-                bufferedFileWriter.write("Checkout token for this game session is: " + user.getUserToken() + "\n");
+                bufferedFileWriter.write(sb.toString());
 
                 bufferedFileWriter.close();
             } catch(IOException e){
@@ -53,22 +56,31 @@ public class UserFile {
             }
         } else if(fileStatus == 0){
             try{
+                String amountEarned = String.valueOf(user.getAmtEarned());
+                StringBuilder sb = new StringBuilder();
+                sb.append("Date and time of playing: ").append(formattedDateTime).append("\n");
+                sb.append("Username: ").append(user.getName()).append("\n");
+                sb.append("Number of correctly answered questions: ").append(user.getCrtAnswers()).append("\n");
+                sb.append("Amount earned by ").append(user.getName()).append(" is: #").append(amountEarned).append("\n");
+                sb.append("Checkout token for this game session is: ").append(user.getUserToken()).append("\n");
+
                 FileWriter fileWriter = new FileWriter(user.getName() + ".txt");
                 BufferedWriter bufferedFileWriter = new BufferedWriter(fileWriter);
 
-                bufferedFileWriter.write("Date and time of playing: " + formattedDateTime + "\n");
-                bufferedFileWriter.append("Username: ").append(user.getName()).append("\n");
-                bufferedFileWriter.append("Number of correctly answered questions: ").append(String.valueOf(user.getCrtAnswers())).append("\n");
-                bufferedFileWriter.append("Amount earned by ").append(user.getName()).append(" is: #").append(String.valueOf(user.getAmtEarned())).append("\n");
-                bufferedFileWriter.write("Checkout token for this game session is: " + user.getUserToken() + "\n");
+                bufferedFileWriter.write(sb.toString());
 
+//                bufferedFileWriter.write("Date and time of playing: " + formattedDateTime + "\n");
+//                bufferedFileWriter.append("Username: ").append(user.getName()).append("\n");
+//                bufferedFileWriter.append("Number of correctly answered questions: ").append(String.valueOf(user.getCrtAnswers())).append("\n");
+//                bufferedFileWriter.append("Amount earned by ").append(user.getName()).append(" is: #").append(amountEarned).append("\n");
+//                bufferedFileWriter.write("Checkout token for this game session is: " + user.getUserToken() + "\n");
+//
                 bufferedFileWriter.close();
             } catch(IOException e){
                 System.out.println("An error occurred while writing to file");
                 e.printStackTrace();
             }
         }
-
     }
 
     public void displayUserStats(User user) {

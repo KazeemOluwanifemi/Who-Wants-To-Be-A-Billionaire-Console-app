@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class User{
     private String name;
     private int crtAnswers;
-    private double amtEarned;
+    private long amtEarned;
     private String token;
 
 
@@ -49,11 +49,11 @@ public class User{
         this.crtAnswers = crtAnswers;
     }
 
-    public double getAmtEarned() {
+    public long getAmtEarned() {
         return amtEarned;
     }
 
-    public void setAmtEarned(double amtEarned) {
+    public void setAmtEarned(long amtEarned) {
         this.amtEarned = amtEarned;
     }
 }
