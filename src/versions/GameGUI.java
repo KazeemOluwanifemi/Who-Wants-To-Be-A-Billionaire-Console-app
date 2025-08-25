@@ -253,7 +253,7 @@ public class GameGUI extends JFrame {
             return;
         }
 
-        if (selectedValue.equals(q.getCorrectOption())) {
+        if (selectedValue.equals(q.getCorrectOptionValue())) {
             // Correct!
             int newCorrect = user.getCrtAnswers() + 1;
             user.setCrtAnswers(newCorrect);
@@ -270,7 +270,7 @@ public class GameGUI extends JFrame {
         } else {
             // Wrong -> game over
             JOptionPane.showMessageDialog(this,
-                    "Wrong! The correct answer was: " + q.getCorrectOption(),
+                    "Wrong! The correct answer was: " + q.getCorrectOptionValue(),
                     "Incorrect", JOptionPane.ERROR_MESSAGE);
             endGameAndReturnToMenu(false);
         }
@@ -325,10 +325,10 @@ public class GameGUI extends JFrame {
 
         // Map which buttons match correct / trick
         // Correct
-        boolean aCorrect = q.getOptionA().equals(q.getCorrectOption());
-        boolean bCorrect = q.getOptionB().equals(q.getCorrectOption());
-        boolean cCorrect = q.getOptionC().equals(q.getCorrectOption());
-        boolean dCorrect = q.getOptionD().equals(q.getCorrectOption());
+        boolean aCorrect = q.getOptionA().equals(q.getCorrectOptionValue());
+        boolean bCorrect = q.getOptionB().equals(q.getCorrectOptionValue());
+        boolean cCorrect = q.getOptionC().equals(q.getCorrectOptionValue());
+        boolean dCorrect = q.getOptionD().equals(q.getCorrectOptionValue());
 
         // Trick
         boolean aTrick = q.getOptionA().equals(q.getTrickOption());
@@ -396,7 +396,7 @@ public class GameGUI extends JFrame {
             return;
         }
 
-        if (selectedValue.equals(q.getCorrectOption())) {
+        if (selectedValue.equals(q.getCorrectOptionValue())) {
             user.setCrtAnswers(user.getCrtAnswers() + 1);
             user.setAmtEarned(q.cashPrize(targetIndex));
             JOptionPane.showMessageDialog(this,
@@ -404,7 +404,7 @@ public class GameGUI extends JFrame {
                     "Correct", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(this,
-                    "Wrong! The correct answer was: " + q.getCorrectOption(),
+                    "Wrong! The correct answer was: " + q.getCorrectOptionValue(),
                     "Incorrect", JOptionPane.ERROR_MESSAGE);
             endGameAndReturnToMenu(false);
             return;

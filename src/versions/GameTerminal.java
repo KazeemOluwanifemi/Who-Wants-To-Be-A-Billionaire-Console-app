@@ -13,6 +13,11 @@ public class GameTerminal {
 //        the main method only serves as the game initializer
         boolean running = true;
         Scanner reader = new Scanner(System.in);
+
+        int lifeLineUsed5050 = 0;
+        int lifeLineUsedSwap = 0;
+        int lifeLineUsedAsk = 0;
+
         while (running) {
 //            User Statistics Inner class instantiated
             User user = new User();
@@ -35,7 +40,7 @@ public class GameTerminal {
                     System.out.println();
                     user.initializeUserName();
                     displayRules(user);
-                    loopThroughQuestions(questionList, user);
+                    loopThroughQuestions(questionList, user, lifeLineUsed5050, lifeLineUsedSwap, lifeLineUsedAsk);
                 } else if(playOrExitGame == 2) {
                     System.out.println("Exiting game now.");
                     running = false;
@@ -83,10 +88,11 @@ public class GameTerminal {
     }
 
 //    this method loops through questions
-    public static void loopThroughQuestions(List<Question> questionsList, User user) {
+    public static void loopThroughQuestions(List<Question> questionsList, User user, int lifeLineUsed5050, int lifeLineUsedSwap, int lifeLineUsedAsk) {
         UserFile userFile = new UserFile();
         Collections.shuffle(questionsList);
         List<Question> shuffledQuestions = questionsList;
+
 
         Scanner reader = new Scanner(System.in);
         int correctAnswers = 0;
@@ -96,7 +102,9 @@ public class GameTerminal {
             String userAnswer = reader.nextLine().trim().toUpperCase();
             String optionValue = checkOption(questionsList.get(index), userAnswer);
 
-            if (userAnswer.equals(questionsList.get(index).getCorrectOption()) || optionValue.equals(questionsList.get(index).getCorrectOption())) {
+            System.out.println(optionValue);
+
+            if (userAnswer.equalsIgnoreCase(questionsList.get(index).getCorrectOptionValue()) || optionValue.equalsIgnoreCase(questionsList.get(index).getCorrectOptionValue())) {
                 correctAnswers++;
                 user.setCrtAnswers(correctAnswers);
                 System.out.println("Correct!");
@@ -117,24 +125,42 @@ public class GameTerminal {
                             System.out.println("Input cannot be empty. Please try again.");
                         case "1":
                             lifeLine = "F";
-                            displayLifelineIllegibilityMessage(lifeLine);
-                            System.out.println("50/50 lifeline activated! Two incorrect options have been removed.");
-                            System.out.println();
-                            lifeline5050(index, shuffledQuestions, reader, user, userFile);
+                            lifeLineUsed5050 = lifeLineUsed5050 + 1;
+                            displayLifelineValidityMessage(lifeLine, lifeLineUsed5050);
+                            if(lifeLineUsed5050 > 1){
+                                running = false;
+                                break;
+                            } else {
+                                System.out.println("50/50 lifeline activated! Two incorrect options have been removed.");
+                                System.out.println();
+                                lifeline5050(index, shuffledQuestions, reader, user, userFile);
+                            }
                             running = false;
                             break;
                         case "2":
                             lifeLine = "S";
-                            displayLifelineIllegibilityMessage(lifeLine);
-                            System.out.println("Swap question lifeline activated! The question has been swapped.");
-                            System.out.println();
-                            swapQuestion(questionsList, index, reader, user, userFile);
+                            lifeLineUsedSwap = lifeLineUsedSwap + 1;
+                            displayLifelineValidityMessage(lifeLine, lifeLineUsedSwap);
+                            if(lifeLineUsedSwap > 1){
+                                running = false;
+                                break;
+                            } else {
+                                System.out.println("Swap question lifeline activated! The question has been swapped.");
+                                System.out.println();
+                                swapQuestion(questionsList, index, reader, user, userFile);
+                            }
                             running = false;
                             break;
                         case "3":
                             lifeLine = "A";
-                            displayLifelineIllegibilityMessage(lifeLine);
-                            System.out.println("This feature is still under construction. Please try again later.");
+                            lifeLineUsedAsk = lifeLineUsedAsk + 1;
+                            displayLifelineValidityMessage(lifeLine, lifeLineUsedAsk);
+                            if(lifeLineUsedAsk > 1){
+                                running = false;
+                                break;
+                            } else {
+                                System.out.println("This feature is still under construction. Please try again later.");
+                            }
                             running = false;
                             break;
                     }
@@ -145,7 +171,7 @@ public class GameTerminal {
                 endGameMessage(user, userFile);
             }
             else {
-                System.out.println("Wrong! The correct answer was: " + questionsList.get(index).getCorrectOption());
+                System.out.println("Wrong! The correct answer was: " + questionsList.get(index).getCorrectOptionValue());
                 endGameMessage(user, userFile);
                 break;
             }
@@ -218,15 +244,16 @@ public class GameTerminal {
         String userAnswerSwapped = reader.nextLine().trim().toUpperCase();
         String optionValueSwapped = checkOption(questionsList.get(index + 2), userAnswerSwapped);
 
-        if(userAnswerSwapped.equals(questionsList.get(index + 2).getCorrectOption()) || optionValueSwapped.equals(questionsList.get(index + 2).getCorrectOption())) {
+        if(userAnswerSwapped.equalsIgnoreCase(questionsList.get(index + 2).getCorrectOptionValue()) || optionValueSwapped.equalsIgnoreCase(questionsList.get(index + 2).getCorrectOptionValue())) {
             user.setCrtAnswers(user.getCrtAnswers() + 1);
             System.out.println("Correct!");
             user.setAmtEarned(questionsList.get(index + 2).cashPrize(index + 2));
             System.out.println("You have earned: #" + user.getAmtEarned());
             System.out.println();
         } else {
-            System.out.println("Wrong! The correct answer was: " + questionsList.get(index + 2).getCorrectOption());
+            System.out.println("Wrong! The correct answer was: " + questionsList.get(index + 2).getCorrectOptionValue());
             endGameMessage(user, userFile);
+//            how to make it end the game and loop back to main menu
         }
         System.out.println();
         System.out.println("You have used the Swap question lifeline.");
@@ -237,18 +264,21 @@ public class GameTerminal {
 //    50/50 lifeline method
 private static void lifeline5050(int index, List<Question> shuffledList, Scanner reader, User user, UserFile userFile){
     System.out.println(shuffledList.get(index).getQuestion());
-    System.out.println("A. " + shuffledList.get(index).getCorrectOption());
+    System.out.println("A. " + shuffledList.get(index).getCorrectOptionValue());
     System.out.println("B. " + shuffledList.get(index).getTrickOption());
 
     System.out.print("Please enter your answer (A or B): ");
     String userAnswer = reader.nextLine().trim().toUpperCase();
-    if (userAnswer.equals(shuffledList.get(index).getCorrectOption()) || userAnswer.equals(shuffledList.get(index).getTrickOption())) {
+    String optionValue = checkOption(shuffledList.get(index), userAnswer);
+    System.out.println(optionValue);
+
+    if (userAnswer.equalsIgnoreCase(shuffledList.get(index).getCorrectOptionValue()) || optionValue.equalsIgnoreCase(shuffledList.get(index).getCorrectOptionValue())) {
         user.setAmtEarned(shuffledList.get(index).cashPrize(index));
         user.setCrtAnswers(user.getCrtAnswers() + 1);
         System.out.println("Correct!");
         System.out.println("You have earned: #" + user.getAmtEarned());
     } else {
-        System.out.println("Wrong! The correct answer was: " + shuffledList.get(index).getCorrectOption());
+        System.out.println("Wrong! The correct answer was: " + shuffledList.get(index).getCorrectOptionValue());
         endGameMessage(user, userFile);
     }
     System.out.println();
@@ -258,12 +288,12 @@ private static void lifeline5050(int index, List<Question> shuffledList, Scanner
 }
 
 //    display lifeline illegibility message
-    public static void displayLifelineIllegibilityMessage(String status) {
-        if(status.equalsIgnoreCase("F")){
+    public static void displayLifelineValidityMessage(String choice, int counter) {
+        if(choice.equalsIgnoreCase("F") && counter > 1){
             System.out.println("You have already used the 50/50 lifeline.");
-        } else if(status.equalsIgnoreCase("S")){
+        } else if(choice.equalsIgnoreCase("S") && counter > 1){
             System.out.println("You have already used the Swap question lifeline.");
-        } else if(status.equalsIgnoreCase("A")){
+        } else if(choice.equalsIgnoreCase("A") && counter > 1){
             System.out.println("You have already used the Ask the Audience lifeline.");
         }
     }

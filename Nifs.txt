@@ -1,5 +1,5 @@
-Date and time of playing: 22-08-2025 02:20:29
+Date and time of playing: 25-08-2025 11:24:54
 Username: Nifs
 Number of correctly answered questions: 1
-Amount earned by Nifs is: #15000.0
-Checkout token for this game session is: d3r7bxb1zc
+Amount earned by Nifs is: #5000
+Checkout token for this game session is: b1u8qxn6ua

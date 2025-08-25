@@ -34,7 +34,7 @@ public class Question {
                     theQuestion.setOptionB(pieces[2].trim());
                     theQuestion.setOptionC(pieces[3].trim());
                     theQuestion.setOptionD(pieces[4].trim());
-                    theQuestion.setCorrectOption(pieces[5].trim());
+                    theQuestion.setCorrectOptionValue(pieces[5].trim());
                     theQuestion.setTrickOption(pieces[6].trim());
                     questions.add(theQuestion);
                 }
@@ -121,11 +121,11 @@ public class Question {
         this.optionD = optionD;
     }
 
-    public String getCorrectOption() {
+    public String getCorrectOptionValue() {
         return correctOption;
     }
 
-    public void setCorrectOption(String correctOption) {
+    public void setCorrectOptionValue(String correctOption) {
         this.correctOption = correctOption;
     }
 

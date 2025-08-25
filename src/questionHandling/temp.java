@@ -161,7 +161,7 @@
 //                    userAnswerCheck = checkOption(questionList, userAnswer, i);
 //                    counter++;
 ////                process and validate the input using a function
-//                    if(userAnswerCheck.equalsIgnoreCase(questionList.get(i).getCorrectOption())){
+//                    if(userAnswerCheck.equalsIgnoreCase(questionList.get(i).getCorrectOptionValue())){
 //                        System.out.println("Correct, you have earned #" + cashPrize);
 //                        amtEarned = cashPrize;
 //                        counterCorrect++;
@@ -193,7 +193,7 @@
 //                                    finalAnswerCheck = checkOption(questionList, finalAnswer, i);
 //
 //
-//                                    if (finalAnswerCheck.equalsIgnoreCase(questionList.get(i).getCorrectOption())) {
+//                                    if (finalAnswerCheck.equalsIgnoreCase(questionList.get(i).getCorrectOptionValue())) {
 //                                        System.out.println("Correct, you have earned #" + String.valueOf(cashPrize));
 //                                        amtEarned = cashPrize;
 //                                        counterCorrect++;
@@ -201,7 +201,7 @@
 //                                    } else {
 ////                                     this is supposed to notify a user's validity status for the swap question functionality
 //                                        System.out.println("Wrong answer, again.");
-//                                        if(counter >= 3 && !finalAnswerCheck.equalsIgnoreCase(questionList.get(i).getCorrectOption())){
+//                                        if(counter >= 3 && !finalAnswerCheck.equalsIgnoreCase(questionList.get(i).getCorrectOptionValue())){
 //                                            cashPrize = theQuestion.cashPrize(i+2);
 //                                            int swap = displaySwapMenu();
 //                                            if(swap == 1){
@@ -293,7 +293,7 @@
 //                        System.out.print("-> ");
 //                        userAnswer = reader.nextLine().toUpperCase();
 //                        userAnswerCheck = checkOption(questionList, userAnswer, i + 2);
-//                        if (userAnswerCheck.equalsIgnoreCase(questionList.get(i + 2).getCorrectOption())) {
+//                        if (userAnswerCheck.equalsIgnoreCase(questionList.get(i + 2).getCorrectOptionValue())) {
 //                            counterCorrect++;
 //                            running3 = false;
 //                        } else{
