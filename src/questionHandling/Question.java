@@ -136,9 +136,4 @@ public class Question {
     public void setCashPrize(Integer prize){
         this.cashPrize = prize;
     }
-
-    public static void main(String[] args) {
-        long numb = 200000000;
-        System.out.println(numb);
-    }
 }

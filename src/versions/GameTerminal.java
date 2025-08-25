@@ -267,4 +267,8 @@ private static void lifeline5050(int index, List<Question> shuffledList, Scanner
             System.out.println("You have already used the Ask the Audience lifeline.");
         }
     }
+
+//    Highest Ranking Player functionality
+
+
 }
