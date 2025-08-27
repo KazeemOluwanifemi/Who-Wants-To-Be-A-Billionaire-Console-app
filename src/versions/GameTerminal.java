@@ -15,6 +15,8 @@ public class GameTerminal {
         boolean running = true;
         Scanner reader = new Scanner(System.in);
 
+        UserRanking userRanks = new UserRanking();
+
         int lifeLineUsed5050 = 0;
         int lifeLineUsedSwap = 0;
         int lifeLineUsedAsk = 0;
@@ -42,7 +44,10 @@ public class GameTerminal {
                     user.initializeUserName();
                     displayRules(user);
                     loopThroughQuestions(questionList, user, lifeLineUsed5050, lifeLineUsedSwap, lifeLineUsedAsk);
-                } else if(playOrExitGame == 2) {
+                } else if (playOrExitGame == 2) {
+                    userRanks.highestScore();
+                    break;
+                } else if(playOrExitGame == 3) {
                     System.out.println("Exiting game now.");
                     running = false;
                 }
@@ -59,7 +64,8 @@ public class GameTerminal {
     public static void displayMainMenu() {
         System.out.println("Welcome to Who Wants to Be a Millionaire!");
         System.out.println("1. Play Game");
-        System.out.println("2. Exit Game");
+        System.out.println("2. Display highest ranked player");
+        System.out.println("3. Exit Game");
         System.out.println("Please enter your choice: ");
         System.out.print("-> ");
     }
@@ -182,6 +188,8 @@ public class GameTerminal {
         }
         userFile.createAndWriteToUserFile(user);
         userRanks.createWriteToMainFile(user);
+
+//        System.out.println("The highest score is " + highestScore);
         System.out.println();
         reader.close();
     }
@@ -216,14 +224,14 @@ public class GameTerminal {
             if (user.getCrtAnswers() == 10) {
                 System.out.println("========================================================");
                 user.setAmtEarned(questionsList.get(index).cashPrize(9));
-                System.out.println("Congratulations! You have reached the first safety net.");
+                System.out.println("Congratulations! You have reached the second safety net.");
                 System.out.println("You have earned a safety net of: #" + user.getAmtEarned());
                 System.out.println("========================================================");
                 safetyNet = 1;
             } else if (user.getCrtAnswers() == 5) {
                 System.out.println("========================================================");
                 user.setAmtEarned(questionsList.get(index).cashPrize(4));
-                System.out.println("Congratulations! You have reached the second safety net.");
+                System.out.println("Congratulations! You have reached the first safety net.");
                 System.out.println("You have earned a safety net of: #" + user.getAmtEarned());
                 System.out.println("========================================================");
                 safetyNet = 2;

@@ -2,18 +2,21 @@ package userstats;
 
 import java.io.*;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 public class UserRanking {
     private String userName;
     private int userScore;
     private int highestScore;
+    private  String topPlayer;
+
+    File parDir = new File("src/userFilesDatabase");
+    File mainDB = new File(parDir, "mainDB.csv");
 
     public void createWriteToMainFile(User user) {
-
-        File parDir = new File("src/userFilesDatabase");
-        File mainDB = new File(parDir, "mainDB.csv");
         setUserName(user.getName());
         setUserScore(user.getCrtAnswers());
 
@@ -29,22 +32,21 @@ public class UserRanking {
         }
     }
 
-    public HashMap<String,Integer> readFromFile(String filename){
-        HashMap<String,Integer> userStats = new HashMap<>();
+    public List<UserRanking> readFromFile(File filename){
+        List<UserRanking> userStats = new ArrayList<>();
 
-        try(Scanner reader = new Scanner(Paths.get(filename))){
-            while(reader.hasNextLine()){
-                String line = reader.nextLine();
-
+        try(BufferedReader br = new BufferedReader(new FileReader(filename))){
+            for(String line; (line = br.readLine()) != null;){
                 String[] pieces = line.split(",");
 
                 if(pieces.length < 2){
                     System.out.println("There's a faulty line in your main DB file");
                 } else {
-                    setUserName(pieces[0].trim());
-                    setUserScore(Integer.valueOf(pieces[1].trim()));
+                    UserRanking stats = new UserRanking();
+                    stats.setUserName(pieces[0].trim());
+                    stats.setUserScore(Integer.valueOf(pieces[1].trim()));
 
-                    userStats.put(getUserName(), getUserScore());
+                    userStats.add(stats);
                 }
             }
         } catch (IOException e) {
@@ -55,18 +57,35 @@ public class UserRanking {
 
 //    a method to get highest score
 
-    public int highestScore(){
-        HashMap<String, Integer> userStats= readFromFile("mainDB.csv");
+    public void highestScore(){
+        List<UserRanking> userStats= readFromFile(mainDB);
+//        UserRanking stats = new UserRanking();
+        int highest = userStats.getFirst().getUserScore();
+        String topPlayer = userStats.getFirst().getUserName();
 
-//        find and set the highest value
-        int highest = userStats.values().iterator().next();
-        for(int value: userStats.values()){
-            if(value > highest){
-                highest = value;
+        for(UserRanking values: userStats){
+//            System.out.println(values.getUserName());
+//            System.out.println(values.getUserScore());
+//
+            if (values.getUserScore() > highest){
+                highest = values.getUserScore();
+                topPlayer = values.getUserName();
             }
         }
+
         setHighestScore(highest);
-        return getHighestScore();
+        setTopPlayer(topPlayer);
+        System.out.println("The top player is " + getTopPlayer() + " with a score of " + getHighestScore() + " *sparkles !!");
+
+//        find and set the highest value
+//        int highest = userStats.values().iterator().next();
+//        for(int value: userStats.values()){
+//            if(value > highest){
+//                highest = value;
+//            }
+//        }
+//        setHighestScore(highest);
+//        return getHighestScore();
     }
 
     public void setUserName(String userName) {
@@ -91,5 +110,13 @@ public class UserRanking {
 
     public int getHighestScore() {
         return highestScore;
+    }
+
+    public void setTopPlayer(String topPlayer) {
+        this.topPlayer = topPlayer;
+    }
+
+    public String getTopPlayer() {
+        return topPlayer;
     }
 }

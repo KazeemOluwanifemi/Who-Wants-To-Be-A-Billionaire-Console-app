@@ -39,3 +39,57 @@ Username: Nifemi
 Number of correctly answered questions: 1
 Amount earned by Nifemi is: #5000
 Checkout token for this game session is: n6smal7vi9
+
+Date and time of playing: 27-08-2025 08:12:21
+Username: Nifemi
+Number of correctly answered questions: 11
+Amount earned by Nifemi is: #1000000
+Checkout token for this game session is: 0ymdf1hvks
+
+Date and time of playing: 27-08-2025 08:14:00
+Username: Nifemi
+Number of correctly answered questions: 3
+Amount earned by Nifemi is: #15000
+Checkout token for this game session is: orbdtsyizv
+
+Date and time of playing: 27-08-2025 08:15:06
+Username: Nifemi
+Number of correctly answered questions: 0
+Amount earned by Nifemi is: #0
+Checkout token for this game session is: w4svuxo6de
+
+Date and time of playing: 27-08-2025 08:28:19
+Username: Nifemi
+Number of correctly answered questions: 2
+Amount earned by Nifemi is: #10000
+Checkout token for this game session is: te2t6blcwu
+
+Date and time of playing: 27-08-2025 08:48:05
+Username: Nifemi
+Number of correctly answered questions: 5
+Amount earned by Nifemi is: #30000
+Checkout token for this game session is: 3d5wz3xaqa
+
+Date and time of playing: 27-08-2025 09:07:26
+Username: Nifemi
+Number of correctly answered questions: 4
+Amount earned by Nifemi is: #20000
+Checkout token for this game session is: j9awtips9g
+
+Date and time of playing: 27-08-2025 09:46:34
+Username: Nifemi
+Number of correctly answered questions: 3
+Amount earned by Nifemi is: #15000
+Checkout token for this game session is: 566dy46qbv
+
+Date and time of playing: 27-08-2025 09:55:26
+Username: Nifemi
+Number of correctly answered questions: 1
+Amount earned by Nifemi is: #5000
+Checkout token for this game session is: eub4zq3oe2
+
+Date and time of playing: 27-08-2025 09:59:02
+Username: nifemi
+Number of correctly answered questions: 3
+Amount earned by nifemi is: #15000
+Checkout token for this game session is: 88os4stg2b
