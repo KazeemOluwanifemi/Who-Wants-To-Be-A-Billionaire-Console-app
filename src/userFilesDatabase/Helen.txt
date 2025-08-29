@@ -1,0 +1,5 @@
+Date and time of playing: 29-08-2025 13:25:10
+Username: Helen
+Number of correctly answered questions: 25
+Amount earned by Helen is: #20000000
+Checkout token for this game session is: null

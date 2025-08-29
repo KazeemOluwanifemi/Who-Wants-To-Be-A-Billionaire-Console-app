@@ -14,7 +14,7 @@ public class UserRanking {
     private  String topPlayer;
 
     File parDir = new File("src/userFilesDatabase");
-    File mainDB = new File(parDir, "mainDB.csv");
+    public File mainDB = new File(parDir, "mainDB.csv");
 
     public void createWriteToMainFile(User user) {
         setUserName(user.getName());
@@ -76,16 +76,6 @@ public class UserRanking {
         setHighestScore(highest);
         setTopPlayer(topPlayer);
         System.out.println("The top player is " + getTopPlayer() + " with a score of " + getHighestScore() + " *sparkles !!");
-
-//        find and set the highest value
-//        int highest = userStats.values().iterator().next();
-//        for(int value: userStats.values()){
-//            if(value > highest){
-//                highest = value;
-//            }
-//        }
-//        setHighestScore(highest);
-//        return getHighestScore();
     }
 
     public void setUserName(String userName) {

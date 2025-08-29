@@ -16,6 +16,4 @@ public class RandomTokenGenerator {
 
         return stringBuild.toString();
     }
-
-
 }
