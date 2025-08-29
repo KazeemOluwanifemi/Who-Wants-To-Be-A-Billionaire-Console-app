@@ -1,4 +1,4 @@
-# Who Wants to Be a Millionaire
+# Who Wants to Be a Millionaire - GUI Version
 
 This project is a recreation of the popular quiz game show "Who Wants to Be a Millionaire." The goal is to provide an engaging and interactive experience where players answer progressively harder questions to win virtual prizes.
 
